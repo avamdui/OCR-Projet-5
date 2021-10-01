@@ -1,3 +1,12 @@
+<?php  
+if(isset($_POST['name']) && isset($_POST['message']) && isset($_POST['email']))
+    {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $message = $_POST['message'];
+        $m = new  Controllers\Contact($name, $email, $message);        
+    } 
+    ?>
 <br><br>
 
 <div class="row">
@@ -53,6 +62,7 @@
             <div class="col-sm-12">
                 <h2 class="text-center">J'ai réponse à tout ! Contactez moi !</h2><br>
                 <form id="contactForm" action="index.php?controller=Contact&task=sendMail" method="POST">
+                <!-- <form id="contactForm" action="index.php?controller=Contact&task=sendMail" method="POST"> -->
                   <!-- Name input -->
                   <div class="mb-3">
                     <label class="form-label" for="name">Nom et prénom</label>

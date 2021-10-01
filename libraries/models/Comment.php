@@ -1,26 +1,35 @@
 <?php
 namespace Models;
 
+/**
+ * DANS CE FICHIER ON DEFINIT UNE CLASSE QUI AURA POUR BUT DE GERER LES DONNEES DES COMMENTAIRES
+ * +
+ * 
+ * On appelle souvent cela un Model (une 3 composantes de l'artchitecture MVC)
+ */
 
-class Comment extends model
+/**
+ * Classe qui gère les données des commentaires
+ */
+class Comment extends Model
 {
+    protected $table = "comments";
 
-    protected $table ='comments';
-
-    public function findAllWithArticle (int $article_id) : array 
+    /**
+     * Retourne la liste des commentaires pour un article donné
+     *
+     * @param integer $article_id
+     *
+     * @return array
+     */
+    public function findAllWithArticle(int $article_id): array
     {
-    
-    $query = $this->pdo->prepare("SELECT * FROM comments WHERE article_id = :article_id");
-    $query->execute(['article_id' => $article_id]);
-    $commentaires = $query->fetchAll();
-    return $commentaires;
-    }
+        // 2. On récupère les commentaires
+        $query = $this->pdo->prepare("SELECT * FROM comments WHERE article_id = :article_id ORDER BY created_at ASC");
+        $query->execute(['article_id' => $article_id]);
+        $commentaires = $query->fetchAll();
 
-
-    public function insert(string $author, string $content, int $article_id): void 
-    {
-        
-        $query = $this->pdo->prepare('INSERT INTO comments SET author = :author, content = :content, article_id = :article_id, created_at = NOW()');
-        $query->execute(compact('author', 'content', 'article_id'));
+        // 3. On retourne les commentaires
+        return $commentaires;
     }
 }

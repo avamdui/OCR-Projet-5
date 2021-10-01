@@ -1,69 +1,86 @@
 <?php
-
 namespace Controllers;
 
- class Article extends Controller
- {
-    protected $modelName = \Models\Article::class;
-     
-     public function blog()
-     {
+class Article extends Controller
+{
+    protected $modelName = "Article";
 
-        $articles = $this->model->findAll("Created_at DESC");
-        
-        // affichage
-        $pageTitle = "blog";
-        \Renderer::render('articles/blog', compact('pageTitle', 'articles'));
-        
+    public function blog()
+    {
+        /**
+         * 1. Récupération des articles
+         */
+        $articles = $this->model->findAll('created_at DESC');
 
-     }
-    
+        /**
+         * 2. Affichage
+         */
+        $pageTitle = "Blog";
+        \Renderer::render("articles/blog", compact('articles', 'pageTitle'));
+    }
 
+    public function show()
+    {
+        $commentModel = new \Models\Comment();
 
-     public function show() 
-     {
+        /**
+         * 1. Récupération du param "id" et vérification de celui-ci
+         */
+        // On part du principe qu'on ne possède pas de param "id"
+        $article_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
-        $commentModel= new \Models\Comment();
-        $article_id = null;
-        
-        if (!empty($_GET['id']) && ctype_digit($_GET['id'])) {
-            $article_id = $_GET['id'];
-        }
-
+        // On peut désormais décider : erreur ou pas ?!
         if (!$article_id) {
             die("Vous devez préciser un paramètre `id` dans l'URL !");
         }
-        
+
+        /**
+         * 3. Récupération de l'article en question
+         * On va ici utiliser une requête préparée car elle inclue une variable qui provient de l'utilisateur : Ne faites
+         * jamais confiance à ce connard d'utilisateur ! :D
+         */
         $article = $this->model->find($article_id);
+
+        /**
+         * 4. Récupération des commentaires de l'article en question
+         * Pareil, toujours une requête préparée pour sécuriser la donnée filée par l'utilisateur (cet enfoiré en puissance !)
+         */
         $commentaires = $commentModel->findAllWithArticle($article_id);
-        
 
+        /**
+         * 5. On affiche 
+         */
         $pageTitle = $article['title'];
-        \Renderer::render('articles/show', compact('pageTitle', 'article', 'commentaires', 'article_id')
-        ); // permet de créer un tableau associatif a partir du nom des vraiables que je veut mettre dedans , pageTile => $ pageTitle
 
-     }
+        \Renderer::render("articles/show", compact('pageTitle', 'article', 'commentaires', 'article_id'));
+    }
 
-     public function delete() 
-     {
-
-
-        if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
+    public function delete()
+    {
+        /**
+         * 1. On vérifie que le GET possède bien un paramètre "id" (delete.php?id=202) et que c'est bien un nombre
+         */
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$id) {
             die("Ho ?! Tu n'as pas précisé l'id de l'article !");
         }
 
-        $id = $_GET['id'];
-
+        /**
+         * 3. Vérification que l'article existe bel et bien
+         */
         $article = $this->model->find($id);
         if (!$article) {
             die("L'article $id n'existe pas, vous ne pouvez donc pas le supprimer !");
         }
 
+        /**
+         * 4. Réelle suppression de l'article
+         */
         $this->model->delete($id);
 
-        \Http::redirect('index.php');
-
-
-     }
-
- }
+        /**
+         * 5. Redirection vers la page d'accueil
+         */
+        \Http::redirect("index.php");
+    }
+}

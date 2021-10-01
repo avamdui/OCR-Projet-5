@@ -1,79 +1,76 @@
 <?php
 namespace Controllers;
 
- class Comment extends Controller
- {
-     protected $modelName = \Models\Comment::class;
+abstract class Comment extends Controller
+{
+    protected $modelName = "Comment";
 
-     public function insert() 
+    public function insert()
+    {
+        $articleModel = new \Models\Article();
 
-     {
-        $articleModel = new \models\Article();
-             
+        /**
+         * 1. On vérifie que les données ont bien été envoyées en POST
+         * D'abord, on récupère les informations à partir du POST
+         * Ensuite, on vérifie qu'elles ne sont pas nulles
+         */
+        // On commence par l'author
+        $author = filter_input(INPUT_POST, 'author', FILTER_SANITIZE_SPECIAL_CHARS);
 
-        $author = null;
-        if (!empty($_POST['author'])) {
-            $author = $_POST['author'];
-        }
-
-        $content = null;
-        if (!empty($_POST['content'])) {
-            // On fait quand même gaffe à ce que le gars n'essaye pas des balises cheloues dans son commentaire
-            $content = htmlspecialchars($_POST['content']);
-        }
+        // Ensuite le contenu
+        $content = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
 
         // Enfin l'id de l'article
-        $article_id = null;
-        if (!empty($_POST['article_id']) && ctype_digit($_POST['article_id'])) {
-            $article_id = $_POST['article_id'];
-        }
+        $article_id = filter_input(INPUT_POST, 'article_id', FILTER_VALIDATE_INT);
 
         // Vérification finale des infos envoyées dans le formulaire (donc dans le POST)
         // Si il n'y a pas d'auteur OU qu'il n'y a pas de contenu OU qu'il n'y a pas d'identifiant d'article
-
         if (!$author || !$article_id || !$content) {
             die("Votre formulaire a été mal rempli !");
         }
 
-
-        $article = $this->model->find($article_id);
-
-
+        $article = $articleModel->find($article_id);
         // Si rien n'est revenu, on fait une erreur
         if (!$article) {
             die("Ho ! L'article $article_id n'existe pas boloss !");
         }
 
         // 3. Insertion du commentaire
-        $this->model->insert($author, $content, $article_id);
+        $created_at = date('Y-m-d H:i:s');
+        $this->model->insert(compact('author', 'content', 'article_id', 'created_at'));
 
         // 4. Redirection vers l'article en question :
         \Http::redirect('index.php?controller=article&task=show&id=' . $article_id);
-            
-     }
+    }
 
-     public function delete() 
-     {
-        
-
-        if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
+    public function delete()
+    {
+        /**
+         * 1. Récupération du paramètre "id" en GET
+         */
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$id) {
             die("Ho ! Fallait préciser le paramètre id en GET !");
         }
-        
-        $id = $_GET['id'];
-        
 
+        /**
+         * 3. Vérification de l'existence du commentaire
+         */
         $commentaire = $this->model->find($id);
         if (!$commentaire) {
             die("Aucun commentaire n'a l'identifiant $id !");
         }
 
-        $article_id = $commentaire['article_id'];
+        /**
+         * 4. Suppression réelle du commentaire
+         * On récupère l'identifiant de l'article avant de supprimer le commentaire
+         */
         $this->model->delete($id);
 
+        /**
+         * 5. Redirection vers l'article en question
+         */
+        $article_id = $commentaire['article_id'];
         \Http::redirect('index.php?controller=article&task=show&id=' . $article_id);
-
-
-     }
-
- } 
+    }
+}

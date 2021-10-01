@@ -1,9 +1,17 @@
 <?php
 
-class HTTP
+class Http
 {
-   public static function redirect(string $url): void{ // void ne retournera rien
-        header("Location: $url");
+    /**
+     * Redirige le visiteur vers $uri
+     *
+     * @param string $uri
+     *
+     * @return void
+     */
+    public static function redirect(string $uri): void
+    {
+        header("Location: $uri");
         exit();
     }
 }

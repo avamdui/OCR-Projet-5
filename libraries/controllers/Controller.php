@@ -1,16 +1,16 @@
 <?php
+
 namespace Controllers;
 
-abstract class controller
+abstract class Controller
 {
 
-    protected $model;
     protected $modelName;
-    
+    protected $model;
+
     public function __construct()
     {
-        $this->model= new $this->modelName();
+        $realModelName = "\\Models\\" . $this->modelName;
+        $this->model = new $realModelName();
     }
-
-
 }

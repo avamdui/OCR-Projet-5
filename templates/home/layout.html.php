@@ -15,6 +15,7 @@
         <?php include "topbar.html.php" ?>
         <main>
         <div class="container">
+
             <?= $pageContent ?>           
         </div>
         </main>

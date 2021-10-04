@@ -119,6 +119,7 @@ a:hover {
 /*------/ Socials /------*/
 .socials {
   padding: 1.5rem 0;
+  font-size: 2rem
 }
 .socials ul li {
   display: inline-block;
@@ -158,6 +159,19 @@ a:hover {
   height: 0.7rem;
   background-color: #0078ff;
 }
+.skill-mf .bar1 { 
+width: 85%;
+}
+.skill-mf .bar2 { 
+width: 70%;
+}
+.skill-mf .bar3 { 
+ width: 30%;
+  }
+.skill-mf .bar4 { 
+width: 10%;
+}
+/* style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" */
 
 
 /*--------------------------------------------------------------

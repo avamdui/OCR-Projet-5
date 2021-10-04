@@ -32,7 +32,7 @@ abstract class Comment extends Controller
         $article = $articleModel->find($article_id);
         // Si rien n'est revenu, on fait une erreur
         if (!$article) {
-            die("Ho ! L'article $article_id n'existe pas boloss !");
+            die("Ho ! L'article $article_id n'existe pas !");
         }
 
         // 3. Insertion du commentaire

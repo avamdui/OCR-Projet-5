@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * CE FICHIER A POUR BUT D'AFFICHER LA PAGE D'ACCUEIL !
  * 

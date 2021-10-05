@@ -4,6 +4,7 @@ namespace Controllers;
 class Article extends Controller
 {
     protected $modelName = "Article";
+
     public function blog()
     {
         /**
@@ -21,7 +22,6 @@ class Article extends Controller
     public function show()
     {
         $commentModel = new \Models\Comment();
-       
 
         /**
          * 1. Récupération du param "id" et vérification de celui-ci

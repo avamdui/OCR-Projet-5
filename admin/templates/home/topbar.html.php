@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary text-white  py-3">
+<nav class="navbar navbar-expand-lg navbar-dark bg-success text-white py-3">
     <div class="container-fluid "
             <a href="#" class="text-white brand-logo"><img src="../img/logo.png" height="80" alt="" ></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,9 +7,9 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <ul class="nav justify-content-end">
-                    <li class="btn btn-outline-primary me-2"><a class="nav-link  text-white" href="index.php">Accueil</a></li>
-                    <li class="btn btn-outline-primary me-2"><a class="nav-link text-white" href="index.php?controller=article&task=blog">Blog</a></li>
-                    <li class="btn btn-outline-primary me-2"><a class="nav-link  text-white"" href="index.php?page=home">Connexion</a></li>
+                    <li class="btn btn-outline-success me-2"><a class="nav-link  text-white" href="index.php">Gestion</a></li>
+                    <li class="btn btn-outline-success me-2"><a class="nav-link text-white" href="index.php?controller=article&task=blog">Publier</a></li>
+                    <li class="btn btn-outline-success me-2"><a class="nav-link  text-white"" href="index.php?controller=login&task=logout"">déconnexion</a></li>
                 </ul>
             </div>
     </div>

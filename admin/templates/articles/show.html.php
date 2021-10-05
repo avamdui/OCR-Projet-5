@@ -20,6 +20,7 @@
 
 <form action="index.php?controller=comment&task=insert" method="POST">
     <h3>Vous voulez réagir ? N'hésitez pas les bros !</h3>
+    <input type="text" name="author" placeholder="Votre pseudo !">
     <textarea name="content" id="" cols="30" rows="10" placeholder="Votre commentaire ..."></textarea>
     <input type="hidden" name="article_id" value="<?= $article_id ?>">
     <button>Commenter !</button>

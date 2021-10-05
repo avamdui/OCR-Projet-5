@@ -1,15 +1,23 @@
 <?php
 namespace Models;
+
 abstract class Model
 {
     protected $pdo;
     protected $table;
+
     public function __construct()
     {
         $this->pdo = \Database::getPdo();
     }
 
-
+    /**
+     * Retourne un item dans la base de données grâce à son id
+     *
+     * @param integer $id
+     *
+     * @return array|bool retourne un tableau si on trouve l'item, false si on ne trouve rien
+     */
     public function find(int $id): array
     {
         // 2. On prépare une requête
@@ -43,7 +51,13 @@ abstract class Model
         return $items;
     }
 
-
+    /**
+     * Supprime un item grâce à son id
+     *
+     * @param integer $id
+     *
+     * @return void
+     */
     public function delete(int $id): void
     {
         // 2. On exécute la suppression
@@ -51,7 +65,13 @@ abstract class Model
         $query->execute(['id' => $id]);
     }
 
-
+    /**
+     * Insère une nouvelle ligne dans $table 
+     *
+     * @param array $data un tableau associatif des champs à insérer
+     *
+     * @return void
+     */
     public function insert(array $data): void
     {
         /**

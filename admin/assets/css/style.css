@@ -1,0 +1,24 @@
+
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+body {
+  min-height: 100vh;
+  position: relative;
+  margin: 0;
+   box-sizing: border-box;
+
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  height: 100px;
+
+ 
+}
+.container {
+  width: auto;
+  padding: 0 15px;
+}
+

@@ -1,22 +1,9 @@
 <?php
-
+session_start();
 class Application
 {
-    /**
-     * @var string
-     */
-    const DEFAULT_CONTROLLER = "Index";
-
-    /**
-     * @var string
-     */
-    const DEFAULT_TASK = "welcom";
-
-    /**
-     * Exécute l'action nécessaire sur le controller voulu
-     *
-     * @return void
-     */
+    const DEFAULT_CONTROLLER = "Login";
+    const DEFAULT_TASK = "loginPage";
     public static function process()
     {
         $controllerName = self::getControllerName();
@@ -24,6 +11,7 @@ class Application
         $controller = new $controllerName();
         $controller->$taskName();
     }
+
 
     private static function getTaskName(): string
     {

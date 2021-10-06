@@ -8,7 +8,7 @@ class Login extends model
             'email'     =>  $email,
             'password'  =>  $password
         ];
-        $query = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE email = :email AND password = :password");
+        $query = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE email = :email AND password = :password AND admin = 1 ");
         $query->execute($a);
         $exist = $query->rowCount();
         return $exist;
@@ -20,8 +20,5 @@ class Login extends model
         $query->execute();
         $modo = $query->fetchAll();
         return $modo;
-    }
-    function logout() { 
-        session_destroy();
     }
 }

@@ -1,5 +1,6 @@
 <h1>Nos articles</h1>
 
+<?php ($_SESSION['admin']) ? "" : \Http::redirect('index.php?controller=Login&task=loginPage') ;  ?>
 
 <?php 
 foreach($articles as $article) : { ?>

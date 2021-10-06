@@ -2,16 +2,17 @@
 session_start();
 class Application
 {
-    const DEFAULT_CONTROLLER = "Login";
-    const DEFAULT_TASK = "loginPage";
-    public static function process()
+    const DEFAULT_CONTROLLER = "index";
+    const DEFAULT_TASK = "Welcom";
+     public static function process()
     {
-        $controllerName = self::getControllerName();
-        $taskName = self::getTaskName();
-        $controller = new $controllerName();
-        $controller->$taskName();
-    }
+              
+            $controllerName = self::getControllerName();
+            $taskName = self::getTaskName();
+            $controller = new $controllerName();
+            $controller->$taskName();
 
+    }
 
     private static function getTaskName(): string
     {

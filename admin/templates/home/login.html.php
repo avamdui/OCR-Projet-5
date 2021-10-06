@@ -1,4 +1,3 @@
-<?php echo var_dump($_SESSION)  ?>
 <section class="vh-100">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">

@@ -1,3 +1,4 @@
+<?php ($_SESSION['admin']) ? "" : \Http::redirect('index.php?controller=Login&task=loginPage') ;  ?>
 <h1><?= $article['title'] ?></h1>
 <small>Ecrit le <?= $article['created_at'] ?></small>
 <p><?= $article['introduction'] ?></p>

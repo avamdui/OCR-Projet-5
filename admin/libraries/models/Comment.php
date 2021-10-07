@@ -25,11 +25,11 @@ class Comment extends Model
     public function findAllWithArticle(int $article_id): array
     {
         // 2. On récupère les commentaires
-        $query = $this->pdo->prepare("SELECT * FROM comments WHERE article_id = :article_id ORDER BY created_at ASC");
+        $query = $this->pdo->prepare("SELECT a.*,b.first_name,b.last_name from comments as a left join Users as b on a.author = b.id WHERE a.article_id = :article_id ORDER BY created_at ASC");
         $query->execute(['article_id' => $article_id]);
-        $commentaires = $query->fetchAll();
+        $commentaires = $query->fetchALL();
 
         // 3. On retourne les commentaires
         return $commentaires;
-    }
+    }    
 }

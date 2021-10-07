@@ -22,30 +22,23 @@ class Article extends Controller
     public function show()
     {
         $commentModel = new \Models\Comment();
-
-        /**
+          /**
          * 1. Récupération du param "id" et vérification de celui-ci
          */
         // On part du principe qu'on ne possède pas de param "id"
         $article_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-
-        // On peut désormais décider : erreur ou pas ?!
-        if (!$article_id) {
-            die("Vous devez préciser un paramètre `id` dans l'URL !");
-        }
-
+     
         /**
          * 3. Récupération de l'article en question
-         * On va ici utiliser une requête préparée car elle inclue une variable qui provient de l'utilisateur : Ne faites
-         * jamais confiance à ce connard d'utilisateur ! :D
          */
         $article = $this->model->find($article_id);
 
         /**
          * 4. Récupération des commentaires de l'article en question
-         * Pareil, toujours une requête préparée pour sécuriser la donnée filée par l'utilisateur (cet enfoiré en puissance !)
          */
         $commentaires = $commentModel->findAllWithArticle($article_id);
+        // $author = $commentModel->findAuthor($article_id);
+        // $usersname = $commentModel->findwithusers($author[]);
 
         /**
          * 5. On affiche 

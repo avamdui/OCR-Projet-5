@@ -1,7 +1,6 @@
 <?php
 namespace Controllers;
-
-abstract class Comment extends Controller
+class Comment extends Controller
 {
     protected $modelName = "Comment";
 
@@ -15,7 +14,7 @@ abstract class Comment extends Controller
          * Ensuite, on vérifie qu'elles ne sont pas nulles
          */
         // On commence par l'author
-        $author = filter_input(INPUT_POST, 'author', FILTER_SANITIZE_SPECIAL_CHARS);
+        $author =$_SESSION['author'];
 
         // Ensuite le contenu
         $content = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);

@@ -25,7 +25,10 @@ class Login extends Controller
             $errors['exist']  = "Cet administrateur n'existe pas";
         }else{
             session_start();
+            $user = $this->model->findUser($email);
             $_SESSION['admin'] = $email;
+            $_SESSION['first_name'] = $user['first_name'];
+            $_SESSION['author'] = $user['author'];
             \Http::redirect('index.php');
              }
     }

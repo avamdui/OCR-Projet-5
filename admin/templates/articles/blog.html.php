@@ -13,7 +13,7 @@ foreach($articles as $article) : { ?>
                         <div class="card-body">  
                         <h4 class ="card-title"><?= $article['title'] ?></h4>
                         <div class="card-header"><small class="text-muted">Dernière mise à jour <?= $article['created_at'] ?></small></div>
-                        <p class="card-text"><?= $article['introduction'] ?></p>
+                        <p class="card-text"><?= $article['chapo'] ?></p>
                         <a class="btn btn-primary" href="index.php?controller=article&task=show&id=<?= $article['id'] ?>">Lire la suite</a>
                         </div>
             </div>

@@ -21,4 +21,14 @@ class Login extends model
         $modo = $query->fetchAll();
         return $modo;
     }
+    public function findUser($email): array
+    {
+        // 2. On prépare une requête
+        $query = $this->pdo->prepare("SELECT * FROM {$this->table} as a JOIN COMMENTS as b ON a.id = b.id WHERE a.email = :email");
+        $query->execute(['email' => $email]);
+        $user = $query->fetch();
+
+        // 5. On retourne l'article retrouvé
+        return $user;
+    }
 }

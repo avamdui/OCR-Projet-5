@@ -9,7 +9,10 @@
                 <ul class="nav justify-content-end">
                     <li class="btn btn-outline-success me-2"><a class="nav-link  text-white" href="index.php">Gestion</a></li>
                     <li class="btn btn-outline-success me-2"><a class="nav-link text-white" href="index.php?controller=article&task=blog">Publier</a></li>
-                    <li class="btn btn-outline-success me-2"><a class="nav-link  text-white"" href="index.php?controller=login&task=logout"">déconnexion</a></li>
+                    <?php if (!empty($_SESSION)){
+                    echo '<li class="btn btn-outline-success me-2"><a class="nav-link  text-white"" href="index.php?controller=login&task=logout"">Se déconnecter ( ' . $_SESSION['first_name'] . ') </a></li>';
+                    }
+                    ?>
                 </ul>
             </div>
     </div>

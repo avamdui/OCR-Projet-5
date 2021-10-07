@@ -34,7 +34,7 @@ class Login extends Controller
     }
     function logout() { 
         session_destroy();
-        \Http::redirect('index.php');
+        \Http::redirect('../index.php');
     }
 }
 

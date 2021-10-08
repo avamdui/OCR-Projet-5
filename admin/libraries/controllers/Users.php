@@ -3,7 +3,7 @@ namespace Controllers;
 class Users extends Controller
 {
     protected $modelName = "Users";
-    public function getUsers(){
+    public function getUser(){
 
     }
 

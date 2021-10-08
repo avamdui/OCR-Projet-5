@@ -4,7 +4,8 @@ namespace Controllers;
 class Comment extends Controller
 {
     protected $modelName = "Comment";
-    public function insert()
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public function insert()
     {
         $articleModel = new \Models\Article();
 
@@ -36,8 +37,8 @@ class Comment extends Controller
         // 4. Redirection vers l'article en question :
         \Http::redirect('index.php?controller=article&task=show&id=' . $article_id);
     }
-
-    public function delete()
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public function delete()
     {
         /** * Récupération du paramètre "id" en GET  */
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);

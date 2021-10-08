@@ -5,7 +5,7 @@ class Application
     /**
      * @var string
      */
-    const DEFAULT_CONTROLLER = "Index";
+    const DEFAULT_CONTROLLER = "Contact";
 
     /**
      * @var string

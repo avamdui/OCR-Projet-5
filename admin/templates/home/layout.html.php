@@ -2,9 +2,9 @@
 <html>
     <head>
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="admin/assets/css/style.css" rel="stylesheet">
-        <link href="admin/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <link href="/admin/assets/css/style.css" rel="stylesheet">
+        <link href="/admin/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+        <link href="/admin/assets/vendor/bootstrap-5.1.3-dist/css/bootstrap.css" rel="stylesheet">
         <title>Mon Blog Pro - <?= $pageTitle ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     
@@ -16,12 +16,13 @@
         <main>
         <div class="container">
 
-            <?= $pageContent ?>           
+            <?= $pageContent ?>     
+                  
         </div>
         </main>
         <?php include "footer.html.php" ?>
         <!--Import jQuery before materialize.js-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        <script src="/admin/assets/vendor/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js" ></script>
     </body>
     
 </html>

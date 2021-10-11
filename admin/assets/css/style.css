@@ -5,20 +5,23 @@
 body {
   min-height: 100vh;
   position: relative;
-  margin: 0;
-   box-sizing: border-box;
 
 }
-
 footer {
   position: absolute;
-  bottom: 0;
-  height: 100px;
+  background-color: #20c997;
 
- 
 }
+nav{
+  background-color: #20c997;
+
+}
+
 .container {
   width: auto;
   padding: 0 15px;
 }
-
+.btn {
+    background-color: #20c997;
+    border-color: #20c997;
+    }

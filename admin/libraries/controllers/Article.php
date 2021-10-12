@@ -1,7 +1,7 @@
 <?php
 namespace Controllers;
 
-class Article extends Controller
+class Article extends Getdata
 {
     protected $modelName = "Article";
 
@@ -77,12 +77,13 @@ class Article extends Controller
 
     public function editPost()
     {
-            $title = htmlspecialchars(trim($_POST['title'])); //Je doit créer différente variable
-            $content = htmlspecialchars(trim($_POST['content']));
-            $article_id = htmlspecialchars(trim($_GET['article_id']));
-            $errors = []; // et un tableau vide erreur
-           
-            $created_at = date('Y-m-d H:i:s');
+        
+        $title = Getdata::setTitle($_POST['title']); 
+        $content = Getdata::setContent($_POST['content']);
+        $article_id = Getdata::setArticle_id($_GET['article_id']);
+        $created_at = Getdata::setDate();
+
+        $errors = []; // et un tableau vide erreur
             if(empty($title) || empty($content)){ //je le rempli si il y a une erreur, si titre OU content est vide
                 $errors['empty'] = "Veuillez remplir tous les champs";
             }

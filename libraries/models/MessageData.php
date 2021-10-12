@@ -1,7 +1,6 @@
 <?php
-namespace Controllers;
-
-class MessageData extends Controller{
+namespace models;
+class MessageData extends Model{
     
     public $msg_id = null;
     public $name = null;

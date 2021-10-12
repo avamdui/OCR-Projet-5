@@ -1,6 +1,6 @@
 <?php
 namespace Controllers;
-class Login extends Controller
+class Login extends Getdata
 {
     protected $modelName = "Login";
     public function loginPage()
@@ -11,12 +11,14 @@ class Login extends Controller
        \Renderer::render('home/login', compact('pageTitle', 'succesMessage', 'errorMessage'));
      }
 
+
     public function login() 
     {
-        session_destroy();
+        
+        $email = GetData::setEmail($_POST['email']);
+        $password = GetData::setPassword($_POST['password']);
         $errors = [];
-        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS);
-        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
+
         if(empty($email) || empty($password))
         {
             $errors['empty'] = "Tous les champs n'ont pas été remplis!";

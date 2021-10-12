@@ -1,6 +1,6 @@
 <?php
 namespace Controllers;
-require_once "./libraries/models/MessageData.php";
+use models\MessageData;
 class MessageMethods extends MessageData 
 { // Methods of processing data captured by the form.html
     
@@ -8,16 +8,14 @@ class MessageMethods extends MessageData
     public $success = null;
     public $error = null;
 
-    
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 public function setMessageData() 
     { // Writing data captured by the form into variables (model/class.MessageData.php)
         
-        parent::setName(strip_tags(trim($_POST['name'])));
-        parent::setEmail(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
-        parent::setMessage(strip_tags(trim($_POST['message'])));
-        parent::setReceived();
+        MessageData::setName(strip_tags(trim($_POST['name'])));
+        MessageData::setEmail(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
+        MessageData::setMessage(strip_tags(trim($_POST['message'])));
+        MessageData::setReceived();
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function checkFormFields() 

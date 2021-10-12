@@ -1,6 +1,5 @@
 <?php
 namespace Controllers;
-
  class Contact extends MessageMethods
  { 
    public $success = null;
@@ -23,7 +22,9 @@ namespace Controllers;
           $msg->sendMessage();
           $success = $msg->success;
           \Renderer::render('home/contact', compact('success'));
-      }$error = $msg->error;
-      \Renderer::render('home/contact', compact('error'));
+      }else {$error = $msg->error;
+        \Renderer::render('home/contact', compact('error'));}
+
+      
   }
 }

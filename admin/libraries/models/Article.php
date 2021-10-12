@@ -27,17 +27,22 @@ class Article extends Model
         $query = $this->pdo->prepare($sql);
         $query->execute($e);
     }
+    public function lastId() {
+        $lastid = $this->pdo->lastInsertId();
+        return $lastid;
+    }
 
-public function post_img($tmp_name, $extension, $article_id){   // Création de la fonction
+// public function post_img($tmp_name, $extension, $article_id)
+//     {   // Création de la fonction
+//     $i = [
+//         'id'    =>  $article_id,
+//         'image' =>  $article_id.$extension      //$id = 25 , $extension = .jpg      $id.$extension = "25".".jpg" = 25.jpg
+//     ];
+//     $sql = "UPDATE articles SET image=:image WHERE id=:article_id"; 
+//     $query = $this->pdo->prepare($sql);
+//     $query->execute($i);;
+//     move_uploaded_file($tmp_name,"/img/posts/".$article_id.$extension); // Déplacement du fichier de tmp vers la ou on veux
+//     }
 
-    $i = [
-        'id'    =>  $article_id,
-        'image' =>  $article_id.$extension      //$id = 25 , $extension = .jpg      $id.$extension = "25".".jpg" = 25.jpg
-    ];
-    $sql = "UPDATE articles SET image=:image WHERE id=:article_id"; 
-    $query = $this->pdo->prepare($sql);
-    $query->execute($i);;
-    move_uploaded_file($tmp_name,"/img/posts/".$article_id.$extension); // Déplacement du fichier de tmp vers la ou on veux
 
-}
 }

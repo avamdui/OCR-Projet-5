@@ -1,5 +1,8 @@
 <?php
 namespace Controllers;
+
+use Models\Article;
+
 date_default_timezone_set('Europe/Paris');
 
 class GetData extends Controller
@@ -12,6 +15,7 @@ class GetData extends Controller
     public $name = null;
     public $message = null;
     public $received = null;
+    public $lastid = null;
 
 //--------------------------------------------------------------------------     
     public function getTitle() {
@@ -79,6 +83,15 @@ class GetData extends Controller
     public function setDate() {   
         $this->date = date('Y-m-d H:i:s');
         return $this->date;
+    }
+
+//--------------------------------------------------------------------------
+    public function getLastid() {   
+        return $this->lastid;
+    }
+    public function setLastid($lastid) {   
+        $this->lastid = Article::lastid();
+        return $this->lastid;
     }
 
 //--------------------------------------------------------------------------

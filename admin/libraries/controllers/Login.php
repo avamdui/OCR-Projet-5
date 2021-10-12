@@ -30,6 +30,7 @@ class Login extends Getdata
             $user = $this->model->findUser($email);
             $_SESSION['admin'] = $email;
             $_SESSION['first_name'] = $user['first_name'];
+            $_SESSION['idUsers'] = $user['id'];
             $_SESSION['author'] = $user['author'];
             \Http::redirect('index.php');
              }

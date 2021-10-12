@@ -124,5 +124,70 @@ class Article extends Getdata
                 }
             }
     }
-        
+
+    public function addpost(){
+
+        $pageTitle = "Ajouter un article";
+        \Renderer::render("articles/addpost", compact('pageTitle'));
+
+    }
+    
+    public function insertPost()
+    {
+       
+        $title = Getdata::setTitle($_POST['title']); 
+        $content = Getdata::setContent($_POST['content']);
+        $created_at = Getdata::setDate();
+        $id = NULL;
+        $idUsers = $_SESSION['idUsers'];
+        $errors = []; // et un tableau vide erreur
+            if(empty($title) || empty($content)){ //je le rempli si il y a une erreur, si titre OU content est vide
+                $errors['empty'] = "Veuillez remplir tous les champs";
+            }
+            if(!empty($_FILES['image']['name']))
+            {
+                $file = $_FILES['image']['name'];
+                $extensions = ['.png','.jpg','.jpeg','.gif','.PNG','.JPG','.JPEG','.GIF'];
+                $extension = strrchr($file,'.');
+    
+            if(!in_array($extension,$extensions)){
+                    $errors['image'] = "Cette image n'est pas valable";
+                }
+            }
+
+            if(!empty($errors)){ // si erreur 
+                ?>
+                <div class="card red">
+                    <div class="card-content white-text">
+                        <?php
+                        foreach($errors as $error){
+                            echo $error."<br/>";
+                        }
+                        ?>
+                    </div>
+                </div>
+                <?php
+            }else{
+            $this->model->insert(compact('title','content','id','created_at','idUsers'));
+            $lastid = $this->model->lastid();
+         
+                if (isset($_FILES['image'])  AND !empty($_FILES['image']['name'])) 
+                {   
+                   
+                    $path = '.././img/posts/'.$lastid.$extension;
+                    $tmpName = $_FILES['image']['tmp_name'];
+                    move_uploaded_file($tmpName,$path);
+                    \Http::redirect("index.php?controller=article&task=show&id=".$lastid);
+                }else
+                {
+            \Http::redirect("index.php?controller=article&task=show&id=".$lastid);
+                }
+            }
+    }
+    
+
+
+
+
+
 }

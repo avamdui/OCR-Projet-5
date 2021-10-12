@@ -1,4 +1,14 @@
-<h1>Nos articles</h1>
+<div class="card text-center">
+    <div class="row">
+        <div class="col-4">
+
+        </div>
+        <div class="col-8">
+            <h2 class="card-title">GESTION DES ARTICLES</h2>
+        </div>
+        
+    </div>
+</div>
 
 <?php ($_SESSION['admin']) ? "" : \Http::redirect('index.php?controller=Login&task=loginPage') ;  ?>
 

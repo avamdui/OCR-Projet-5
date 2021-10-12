@@ -73,7 +73,7 @@ abstract class Model
      *
      * @return void
      */
-    public function insert(array $data): void
+    public function insert(array $data)
     {
         /**
          * On cherche à créer quelque chose qui ressemble à ça :
@@ -100,7 +100,11 @@ abstract class Model
         // 5. On prépare et on exécute la requête
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
+    
     }
-
+    public function lastid(){
+        $lastId = $this->pdo->lastInsertId();
+        return $lastId;
+    }
 
 }

@@ -15,6 +15,7 @@ foreach($articles as $article) : { ?>
                         <p class="card-text"><?= $article['chapo'] ?></p>
                         <a class="btn btn-primary" href="index.php?controller=article&task=show&id=<?= $article['id'] ?>">Lire la suite</a>
                         </div>
+                        </div>
             </div>
         </div>
         

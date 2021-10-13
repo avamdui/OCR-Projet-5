@@ -72,7 +72,7 @@ class Article extends Getdata
         /**
          * 5. Redirection vers la page d'accueil
          */
-        \Http::redirect("index.php");
+        \Http::redirect("index.php?controller=article&task=blog");
     }
 
     public function editPost()
@@ -184,10 +184,4 @@ class Article extends Getdata
                 }
             }
     }
-    
-
-
-
-
-
 }

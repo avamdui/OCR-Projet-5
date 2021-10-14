@@ -86,15 +86,6 @@ class GetData extends Controller
     }
 
 //--------------------------------------------------------------------------
-    public function getLastid() {   
-        return $this->lastid;
-    }
-    public function setLastid($lastid) {   
-        $this->lastid = Article::lastid();
-        return $this->lastid;
-    }
-
-//--------------------------------------------------------------------------
 
  
 }

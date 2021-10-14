@@ -32,17 +32,20 @@ class Article extends Model
         return $lastid;
     }
 
-// public function post_img($tmp_name, $extension, $article_id)
-//     {   // Création de la fonction
-//     $i = [
-//         'id'    =>  $article_id,
-//         'image' =>  $article_id.$extension      //$id = 25 , $extension = .jpg      $id.$extension = "25".".jpg" = 25.jpg
-//     ];
-//     $sql = "UPDATE articles SET image=:image WHERE id=:article_id"; 
-//     $query = $this->pdo->prepare($sql);
-//     $query->execute($i);;
-//     move_uploaded_file($tmp_name,"/img/posts/".$article_id.$extension); // Déplacement du fichier de tmp vers la ou on veux
-//     }
+    PUBLIC function countArticles(){
+        
+    
+
+        $sql = "SELECT COUNT* FROM {$this->table}";
+        $resultats = $this->pdo->query($sql);
+        $items = $resultats->fetchAll();
+        $nbArticles = (int) $items['nb_articles'];
+        return $nbArticles;
 
 
+
+       
+
+
+    }
 }

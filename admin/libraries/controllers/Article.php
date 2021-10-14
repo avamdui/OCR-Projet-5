@@ -113,11 +113,17 @@ class Article extends Getdata
             }else{
             $this->model->update($title,$content,$article_id, $created_at);
                 if (isset($_FILES['image'])  AND !empty($_FILES['image']['name'])) 
-                {
+                {   
                     $path = '.././img/posts/'.$article_id.$extension;
                     $tmpName = $_FILES['image']['tmp_name'];
-                    move_uploaded_file($tmpName,$path);
-                    \Http::redirect("index.php?controller=article&task=show&id=".$article_id);
+                    if(file_exists($path)) 
+                        {
+                        chmod($path,0755); 
+                        unlink($path);
+                        move_uploaded_file($tmpName,$path);
+                        \Http::redirect("index.php?controller=article&task=show&id=".$article_id);
+                        }else{move_uploaded_file($tmpName,$path);
+                             \Http::redirect("index.php?controller=article&task=show&id=".$article_id);}
                 }else
                 {
             \Http::redirect("index.php?controller=article&task=show&id=".$article_id);
@@ -184,4 +190,6 @@ class Article extends Getdata
                 }
             }
     }
+
+    
 }

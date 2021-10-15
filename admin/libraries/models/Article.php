@@ -14,7 +14,6 @@ namespace Models;
 class Article extends Model
 {
     protected $table = "articles";
-    
     public function update($title,$content,$article_id, $created_at)
     {
         $e = [ // je créer un tableau $edite qui contiendra les variables a mettre a jour
@@ -32,20 +31,50 @@ class Article extends Model
         return $lastid;
     }
 
-    PUBLIC function countArticles(){
-        
-    
+    public function displayPages () {
 
-        $sql = "SELECT COUNT* FROM {$this->table}";
+        $sql = "SELECT COUNT(*) AS nb_articles FROM articles";
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        $result = $query->fetch();
+
+        $nbArticles = (int) $result['nb_articles'];
+        // On détermine le nombre d'articles par page
+        $parPage = 5;
+
+        // On calcule le nombre de pages total
+        $pages = ceil($nbArticles / $parPage);
+        return $pages;
+        
+    }
+
+    public function displaysArticles($premier,$parPage)
+    {
+ 
+
+        $sql = "SELECT * FROM articles ORDER BY 'created_at' DESC LIMIT :premier, :parpage;";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue(':premier', $premier, $this->pdo::PARAM_INT);
+        $query->bindValue(':parpage', $parPage, $this->pdo::PARAM_INT);
+        $query->execute();
+        $articles = $query->fetchAll($this->pdo::FETCH_ASSOC);
+        return $articles;
+        
+    }
+    public function findAll($order = ""): array
+    {
+        // 1. Création de la chaine SQL
+        $sql = "SELECT * FROM {$this->table}";
+
+        if ($order) {
+            $sql .= " ORDER BY $order";
+        }
+
+        // 2. Récupération des items
         $resultats = $this->pdo->query($sql);
         $items = $resultats->fetchAll();
-        $nbArticles = (int) $items['nb_articles'];
-        return $nbArticles;
 
-
-
-       
-
-
+        // 3. On retourne les items
+        return $items;
     }
 }

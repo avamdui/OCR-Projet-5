@@ -32,4 +32,21 @@ foreach($articles as $article) : { ?>
         </div>
         
 
-<?php } endforeach ?> 
+<?php } endforeach ?> <hr>
+                    <ul class="nav justify-content-center rounded  ">
+                        <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
+                        <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
+                            <a href="/admin/index.php?controller=article&task=blog&page=<?= $currentPage - 1 ?>" class="page-link">Précédente</a>
+                        </li>
+                        <?php for($page = 1; $page <= $pages; $page++): ?>
+                          <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
+                          <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
+                                <a href="/admin/index.php?controller=article&task=blog&page=<?= $page ?>" class="page-link"><?= $page ?></a>
+                            </li>
+                        <?php endfor ?>
+                          <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
+                          <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
+                            <a href="/admin/index.php?controller=article&task=blog&page=<?= $currentPage + 1 ?>" class="page-link">Suivante</a>
+                        </li>
+                    </ul>
+              <br>

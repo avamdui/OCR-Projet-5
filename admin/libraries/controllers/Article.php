@@ -1,22 +1,22 @@
 <?php
 namespace Controllers;
-
 class Article extends Getdata
 {
     protected $modelName = "Article";
-
     public function blog()
     {
-        /**
-         * 1. Récupération des articles
-         */
-        $articles = $this->model->findAll('created_at DESC');
-
-        /**
-         * 2. Affichage
-         */
+        
+        if(isset($_GET['page']) && !empty($_GET['page'])){
+            $currentPage = (int) strip_tags($_GET['page']);
+        }else{
+            $currentPage = 1;
+        }
+        $parPage = 5;
+        $premier = ($currentPage * $parPage) - $parPage;
+        $articles = $this->model->displaysArticles($premier,$parPage);
+        $pages = $this->model->displayPages();
         $pageTitle = "Blog";
-        \Renderer::render("articles/blog", compact('articles', 'pageTitle'));
+        \Renderer::render("articles/blog", compact('articles', 'pageTitle', 'pages', 'currentPage' ));
     }
 
     public function show()

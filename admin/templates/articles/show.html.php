@@ -30,11 +30,16 @@
                             <label  class="form-label"for="title">Titre de l'article : </label>
                             <input type="text" class="form-control" name="title" id="title" value="<?= $article['title'] ?>" required>
                     </div>
+
+                    <div class="mb-3">
+                            <label  class="form-label"for="chapo">Chapô de l'article : </label>
+                            <textarea type="text" class="form-control" name="chapo" id="chapo" required rows="3"  ><?= $article['chapo'] ?></textarea>
+                    </div>
                 
                     <br>
                     <div class="mb-3">
                         <label class="form-label" for="content">Contenu de l'article : </label>
-                        <textarea height="auto" class="form-control" rows="15" name="content" id="content" required><?= strip_tags($article['content']) ?></textarea>
+                        <textarea height="auto" class="form-control" rows="15" name="content" id="content" required><?= $article['content'] ?></textarea>
                     </div>
                     <br>
             

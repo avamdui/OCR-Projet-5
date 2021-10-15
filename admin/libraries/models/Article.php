@@ -14,15 +14,16 @@ namespace Models;
 class Article extends Model
 {
     protected $table = "articles";
-    public function update($title,$content,$article_id, $created_at)
+    public function update($title,$content,$article_id, $created_at, $chapo)
     {
         $e = [ // je créer un tableau $edite qui contiendra les variables a mettre a jour
             'title'     => $title,
             'content'   => $content,
             'created_at'    => $created_at,
+            'chapo' => $chapo,
             'article_id'  => $article_id
         ];
-        $sql = "UPDATE articles SET title=:title, content=:content, created_at=:created_at WHERE id=:article_id";
+        $sql = "UPDATE articles SET title=:title, content=:content, created_at=:created_at, chapo=:chapo WHERE id=:article_id";
         $query = $this->pdo->prepare($sql);
         $query->execute($e);
     }
@@ -52,7 +53,7 @@ class Article extends Model
     {
  
 
-        $sql = "SELECT * FROM articles ORDER BY 'created_at' DESC LIMIT :premier, :parpage;";
+        $sql = "SELECT * FROM articles ORDER BY created_at DESC LIMIT :premier, :parpage;";
         $query = $this->pdo->prepare($sql);
         $query->bindValue(':premier', $premier, $this->pdo::PARAM_INT);
         $query->bindValue(':parpage', $parPage, $this->pdo::PARAM_INT);

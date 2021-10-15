@@ -28,6 +28,11 @@
                             <label  class="form-label"for="title">Titre de l'article : </label>
                             <input type="text" class="form-control" name="title" id="title" required>
                     </div>
+
+                    <div class="mb-3">
+                            <label  class="form-label"for="chapo">Chapô de l'article : (255 caractères maximum) </label>
+                            <textarea type="text" class="form-control" name="chapo" id="chapo" required rows="3"></textarea>
+                    </div>
                 
                     <br>
                     <div class="mb-3">

@@ -16,6 +16,7 @@ class GetData extends Controller
     public $message = null;
     public $received = null;
     public $lastid = null;
+    public $chapo = null;
 
 //--------------------------------------------------------------------------     
     public function getTitle() {
@@ -24,6 +25,14 @@ class GetData extends Controller
     public function setTitle($title) {
         $this->title = htmlspecialchars(trim($title));
         return $this->title;
+    }
+    //--------------------------------------------------------------------------     
+    public function getChapo() {
+        return $this->chapo;
+    }
+    public function setChapo($chapo) {
+        $this->chapo = htmlspecialchars(trim($chapo));
+        return $this->chapo;
     }
 //--------------------------------------------------------------------------
     public function getContent() {

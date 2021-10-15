@@ -79,6 +79,7 @@ class Article extends Getdata
     {
         
         $title = Getdata::setTitle($_POST['title']); 
+        $chapo = Getdata::setChapo($_POST['chapo']);
         $content = Getdata::setContent($_POST['content']);
         $article_id = Getdata::setArticle_id($_GET['article_id']);
         $created_at = Getdata::setDate();
@@ -111,7 +112,7 @@ class Article extends Getdata
                 </div>
                 <?php
             }else{
-            $this->model->update($title,$content,$article_id, $created_at);
+            $this->model->update($title,$content,$article_id, $created_at, $chapo);
                 if (isset($_FILES['image'])  AND !empty($_FILES['image']['name'])) 
                 {   
                     $path = '.././img/posts/'.$article_id.$extension;
@@ -121,12 +122,12 @@ class Article extends Getdata
                         chmod($path,0755); 
                         unlink($path);
                         move_uploaded_file($tmpName,$path);
-                        \Http::redirect("index.php?controller=article&task=show&id=".$article_id);
+                        \Http::redirect("index.php?controller=article&task=blog");
                         }else{move_uploaded_file($tmpName,$path);
-                             \Http::redirect("index.php?controller=article&task=show&id=".$article_id);}
+                             \Http::redirect("index.php?controller=article&task=blog");}
                 }else
                 {
-            \Http::redirect("index.php?controller=article&task=show&id=".$article_id);
+            \Http::redirect("index.php?controller=article&task=blog");
                 }
             }
     }
@@ -142,6 +143,7 @@ class Article extends Getdata
     {
        
         $title = Getdata::setTitle($_POST['title']); 
+        $chapo = Getdata::setChapo($_POST['chapo']); 
         $content = Getdata::setContent($_POST['content']);
         $created_at = Getdata::setDate();
         $id = NULL;
@@ -174,7 +176,7 @@ class Article extends Getdata
                 </div>
                 <?php
             }else{
-            $this->model->insert(compact('title','content','id','created_at','idUsers'));
+            $this->model->insert(compact('title','content','id','created_at','idUsers','chapo'));
             $lastid = $this->model->lastid();
          
                 if (isset($_FILES['image'])  AND !empty($_FILES['image']['name'])) 
@@ -183,10 +185,10 @@ class Article extends Getdata
                     $path = '.././img/posts/'.$lastid.$extension;
                     $tmpName = $_FILES['image']['tmp_name'];
                     move_uploaded_file($tmpName,$path);
-                    \Http::redirect("index.php?controller=article&task=show&id=".$lastid);
+                    \Http::redirect("index.php?controller=article&task=blog");
                 }else
                 {
-            \Http::redirect("index.php?controller=article&task=show&id=".$lastid);
+            \Http::redirect("index.php?controller=article&task=blog");
                 }
             }
     }

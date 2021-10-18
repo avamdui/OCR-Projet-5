@@ -78,4 +78,14 @@ class Article extends Model
         // 3. On retourne les items
         return $items;
     }
+    public function countArticlesUnpost(){
+        
+        $sql = "SELECT COUNT(*) AS nb_articlesUnpost FROM articles WHERE posted=0" ;
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        $result = $query->fetch();
+        $ArticlesUpost = (int) $result['nb_articlesUnpost'];
+        return $ArticlesUpost;
+    }
+
 }

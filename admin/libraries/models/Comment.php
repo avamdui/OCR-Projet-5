@@ -32,4 +32,13 @@ class Comment extends Model
         // 3. On retourne les commentaires
         return $commentaires;
     }    
+    public function countCommentsUnpublied(){
+        
+        $sql = "SELECT COUNT(*) AS nb_comments FROM comments WHERE publied=0" ;
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        $result = $query->fetch();
+        $CommentsUnpublied = (int) $result['nb_comments'];
+        return $CommentsUnpublied;
+    }
 }

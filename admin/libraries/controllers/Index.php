@@ -1,15 +1,25 @@
 <?php
 namespace Controllers;
 
- class Index extends Controller
+use Models\Article;
+use Models\Comment;
+
+class Index extends Controller
  {
    protected $modelName = "index";
    public function welcom()
    {
+      $CommentsModel = new Comment;
+      $countCommentsUnpublied= $CommentsModel->countCommentsUnpublied();
+      $Comments = $CommentsModel->findAll('created_at DESC');
+      $ArticlesModel = new Article;
+      $countArticlesUnpublied= $ArticlesModel->countArticlesUnpost();
+      // $articles = $ArticlesModel->findAll('created_at DESC');
+
       $errorMessage = "";
       $succesMessage = ''; 
       $pageTitle = "Accueil";
-      \Renderer::render('home/index', compact('pageTitle', 'succesMessage', 'errorMessage'));
+      \Renderer::render('home/index', compact('pageTitle', 'succesMessage','Comments','errorMessage', 'countCommentsUnpublied', 'countArticlesUnpublied'));
 
    }
   

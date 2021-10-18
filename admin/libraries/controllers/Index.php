@@ -14,12 +14,12 @@ class Index extends Controller
       $Comments = $CommentsModel->findAll('created_at DESC');
       $ArticlesModel = new Article;
       $countArticlesUnpublied= $ArticlesModel->countArticlesUnpost();
-      // $articles = $ArticlesModel->findAll('created_at DESC');
+      $articles = $ArticlesModel->findAll('ID ASC');
 
       $errorMessage = "";
       $succesMessage = ''; 
       $pageTitle = "Accueil";
-      \Renderer::render('home/index', compact('pageTitle', 'succesMessage','Comments','errorMessage', 'countCommentsUnpublied', 'countArticlesUnpublied'));
+      \Renderer::render('home/index', compact('pageTitle', 'succesMessage','Comments','errorMessage', 'countCommentsUnpublied', 'countArticlesUnpublied','articles'));
 
    }
   

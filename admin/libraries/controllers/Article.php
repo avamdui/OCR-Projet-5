@@ -192,6 +192,21 @@ class Article extends Getdata
                 }
             }
     }
+    public function changestat()
+    {
+        $article_id = $_POST['id'];
+        $postedStat= $_POST['etat'];
+        $posted = '';
+        if($postedStat == 1){
+            $posted = 0;
+            $this->model->Publied($posted, $article_id);
+            \Http::redirect("index.php");
+        }else{
+            $posted = 1;
+            $this->model->Publied($posted, $article_id);
+            \Http::redirect("index.php");
+        }
+    }
 
     
 }

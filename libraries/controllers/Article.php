@@ -83,4 +83,5 @@ class Article extends Controller
          */
         \Http::redirect("index.php");
     }
+    
 }

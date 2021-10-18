@@ -27,6 +27,17 @@ class Article extends Model
         $query = $this->pdo->prepare($sql);
         $query->execute($e);
     }
+    public function Publied($posted, $article_id)
+    {
+        $e = [ // je créer un tableau $edite qui contiendra les variables a mettre a jour
+            'posted' => $posted,
+            'article_id'  => $article_id
+        ];
+        $sql = "UPDATE articles SET posted=:posted WHERE id=:article_id";
+        $query = $this->pdo->prepare($sql);
+        $query->execute($e);
+    }
+
     public function lastId() {
         $lastid = $this->pdo->lastInsertId();
         return $lastid;

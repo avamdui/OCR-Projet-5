@@ -10,6 +10,17 @@
                     <li class="btn btn-outline-primary me-2"><a class="nav-link  text-white" href="index.php">Accueil</a></li>
                     <li class="btn btn-outline-primary me-2"><a class="nav-link text-white" href="index.php?controller=article&task=blog">Blog</a></li>
                     <li class="btn btn-outline-primary me-2"><a class="nav-link  text-white"" href="index.php?page=home">Connexion</a></li>
+                    <form  action="index.php?controller=login&task=login" method="POST">
+                        <li class="btn btn-outline-primary" >
+                        <input  name="email" type="email" id="email" class="nav-link" />
+                        </li>
+                        <li class="btn btn-outline-primary">
+                        <input  name="password" type="password" id="password" class="nav-link" />
+                        </li>
+                        <li class="btn btn-outline-primary">
+                        <button class="nav-link" type="submit">V</button>
+                        </li>
+                    </form>
                 </ul>
             </div>
     </div>

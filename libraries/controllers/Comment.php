@@ -1,16 +1,20 @@
 <?php
 namespace Controllers;
-
 class Comment extends Controller
 {
     protected $modelName = "Comment";
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-public function insert()
+
+    public function insert()
     {
         $articleModel = new \Models\Article();
 
+        /**
+         * 1. On vérifie que les données ont bien été envoyées en POST
+         * D'abord, on récupère les informations à partir du POST
+         * Ensuite, on vérifie qu'elles ne sont pas nulles
+         */
         // On commence par l'author
-        $author = filter_input(INPUT_POST, 'author', FILTER_SANITIZE_SPECIAL_CHARS);
+        $author =$_SESSION['author'];
 
         // Ensuite le contenu
         $content = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -37,25 +41,5 @@ public function insert()
         // 4. Redirection vers l'article en question :
         \Http::redirect('index.php?controller=article&task=show&id=' . $article_id);
     }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-public function delete()
-    {
-        /** * Récupération du paramètre "id" en GET  */
-        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-        if (!$id) {
-            die("Ho ! Fallait préciser le paramètre id en GET !");
-        }
-        /**  * Suppression réelle du commentaire
-         * On récupère l'identifiant de l'article avant de supprimer le commentaire
-         */
-        $commentaire = $this->model->find($id);
-        $article_id = $commentaire['article_id'];
-        $this->model->delete($id);
 
-        /**
-         * 5. Redirection vers l'article en question
-         */
-        
-        \Http::redirect('index.php?controller=article&task=show&id=' . $article_id);
-    }
 }

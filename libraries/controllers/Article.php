@@ -1,49 +1,40 @@
 <?php
 namespace Controllers;
-
-class Article extends Controller
+class Article extends Getdata
 {
     protected $modelName = "Article";
     public function blog()
     {
-        /**
-         * 1. Récupération des articles
-         */
-        $articles = $this->model->findAll('created_at DESC');
-
-        /**
-         * 2. Affichage
-         */
+        
+        if(isset($_GET['page']) && !empty($_GET['page'])){
+            $currentPage = (int) strip_tags($_GET['page']);
+        }else{
+            $currentPage = 1;
+        }
+        $parPage = 5;
+        $premier = ($currentPage * $parPage) - $parPage;
+        $articles = $this->model->displaysArticles($premier,$parPage);
+        $pages = $this->model->displayPages();
         $pageTitle = "Blog";
-        \Renderer::render("articles/blog", compact('articles', 'pageTitle'));
+        \Renderer::render("articles/blog", compact('articles', 'pageTitle', 'pages', 'currentPage' ));
     }
 
     public function show()
     {
         $commentModel = new \Models\Comment();
-       
-
-        /**
+          /**
          * 1. Récupération du param "id" et vérification de celui-ci
          */
         // On part du principe qu'on ne possède pas de param "id"
         $article_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-
-        // On peut désormais décider : erreur ou pas ?!
-        if (!$article_id) {
-            die("Vous devez préciser un paramètre `id` dans l'URL !");
-        }
-
+     
         /**
          * 3. Récupération de l'article en question
-         * On va ici utiliser une requête préparée car elle inclue une variable qui provient de l'utilisateur : Ne faites
-         * jamais confiance à ce connard d'utilisateur ! :D
          */
         $article = $this->model->find($article_id);
 
         /**
          * 4. Récupération des commentaires de l'article en question
-         * Pareil, toujours une requête préparée pour sécuriser la donnée filée par l'utilisateur (cet enfoiré en puissance !)
          */
         $commentaires = $commentModel->findAllWithArticle($article_id);
 
@@ -81,7 +72,13 @@ class Article extends Controller
         /**
          * 5. Redirection vers la page d'accueil
          */
-        \Http::redirect("index.php");
+        \Http::redirect("index.php?controller=article&task=blog");
     }
+
+   
+
+     
+ 
+
     
 }

@@ -1,5 +1,6 @@
 <?php
 namespace Controllers;
+date_default_timezone_set('Europe/Paris');
 abstract class Controller
 {
 

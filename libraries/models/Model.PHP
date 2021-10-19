@@ -1,15 +1,23 @@
 <?php
 namespace Models;
+
 abstract class Model
 {
     protected $pdo;
     protected $table;
+
     public function __construct()
     {
         $this->pdo = \Database::getPdo();
     }
 
-
+    /**
+     * Retourne un item dans la base de données grâce à son id
+     *
+     * @param integer $id
+     *
+     * @return array|bool retourne un tableau si on trouve l'item, false si on ne trouve rien
+     */
     public function find(int $id): array
     {
         // 2. On prépare une requête
@@ -20,6 +28,7 @@ abstract class Model
         // 5. On retourne l'article retrouvé
         return $item;
     }
+
 
     /**
      * Retourne la liste des items
@@ -43,7 +52,13 @@ abstract class Model
         return $items;
     }
 
-
+    /**
+     * Supprime un item grâce à son id
+     *
+     * @param integer $id
+     *
+     * @return void
+     */
     public function delete(int $id): void
     {
         // 2. On exécute la suppression
@@ -51,8 +66,14 @@ abstract class Model
         $query->execute(['id' => $id]);
     }
 
-
-    public function insert(array $data): void
+    /**
+     * Insère une nouvelle ligne dans $table 
+     *
+     * @param array $data un tableau associatif des champs à insérer
+     *
+     * @return void
+     */
+    public function insert(array $data)
     {
         /**
          * On cherche à créer quelque chose qui ressemble à ça :
@@ -79,5 +100,11 @@ abstract class Model
         // 5. On prépare et on exécute la requête
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
+    
     }
+    public function lastid(){
+        $lastId = $this->pdo->lastInsertId();
+        return $lastId;
+    }
+
 }

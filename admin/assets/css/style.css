@@ -25,3 +25,8 @@ nav{
     background-color: #20c997;
     border-color: #20c997;
     }
+
+button {
+  border: none;
+  background-color: white;
+}

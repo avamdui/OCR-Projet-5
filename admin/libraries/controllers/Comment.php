@@ -72,4 +72,20 @@ class Comment extends Controller
         $article_id = $commentaire['article_id'];
         \Http::redirect('index.php?controller=article&task=show&id=' . $article_id);
     }
+    public function changestat()
+    {
+        $comment_id = $_POST['id'];
+        $commentStat= $_POST['etat'];
+        $posted = '';
+        if($commentStat == 1){
+            $publied = 0;
+            $this->model->Publied($publied, $comment_id);
+            \Http::redirect("index.php?controller=Index&task=welcom_comments");
+        }else{
+            $publied = 1;
+            $this->model->Publied($publied, $comment_id);
+            \Http::redirect("index.php?controller=Index&task=welcom_comments");
+        }
+    }
+
 }

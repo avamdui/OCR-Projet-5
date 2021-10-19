@@ -11,37 +11,33 @@ class Index extends Controller
    {
       $CommentsModel = new Comment;
       $countCommentsUnpublied= $CommentsModel->countCommentsUnpublied();
-      $Comments = $CommentsModel->findAll('created_at DESC');
+      
       $ArticlesModel = new Article;
       $countArticlesUnpublied= $ArticlesModel->countArticlesUnpost();
       $articles = $ArticlesModel->findAll('ID ASC');
 
-      $errorMessage = "";
-      $succesMessage = ''; 
+      $dashboard_content = 'templates/home/dashboard-publi.html.php';
       $pageTitle = "Accueil";
-      \Renderer::render('home/index', compact('pageTitle', 'succesMessage','Comments','errorMessage', 'countCommentsUnpublied', 'countArticlesUnpublied','articles'));
 
+      \Renderer::render('home/index', compact('pageTitle', 'dashboard_content', 'countCommentsUnpublied', 'countArticlesUnpublied','articles'));
+      
    }
-  
- 
- public function succes()
- 
- {
-   session_start();
-    $errorMessage = "";
-    $succesMessage =  "Merci ". $_SESSION['name'] ." votre message à bien été envoyé";
-    $pageTitle = "Accueil";
-    \Renderer::render('home/index', compact('pageTitle', 'succesMessage', 'errorMessage'));
 
- }
- 
-public function errorMAil()
- {  
+   public function welcom_comments()
+   {
+      $CommentsModel = new Comment;
+      $countCommentsUnpublied= $CommentsModel->countCommentsUnpublied();
+      $comments = $CommentsModel->findAllWithAllArticle();
+
+      $ArticlesModel = new Article;
+      $countArticlesUnpublied= $ArticlesModel->countArticlesUnpost();
+      $articles = $ArticlesModel->findAll('ID ASC');
+
+      $dashboard_content = 'templates/home/dashboard-comments.html.php';
+      $pageTitle = "Accueil";
+
+      \Renderer::render('home/index', compact('pageTitle','comments', 'dashboard_content', 'countCommentsUnpublied', 'countArticlesUnpublied','articles'));
+      
+   }
     
-    $succesMessage =  '';
-    $errorMessage =  "Votre adresse email n'est pas conforme";
-    $pageTitle = "Accueil";
-    \Renderer::render('home/index', compact('pageTitle','succesMessage', 'errorMessage'));
-
- }
 }

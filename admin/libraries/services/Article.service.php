@@ -1,6 +1,5 @@
 <?php
 class ArticleService {
-
     public function getOneArticle($id) 
     
     {

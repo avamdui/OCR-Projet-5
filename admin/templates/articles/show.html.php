@@ -1,4 +1,4 @@
-<?php ($_SESSION['admin']) ? "" : \Http::redirect('index.php?controller=Login&task=loginPage') ;  ?>
+<!-- <?php ($_SESSION['admin']) ? "" : \Http::redirect('index.php?controller=Login&task=loginPage') ;  ?> -->
 
 
 <div class="input-group" >
@@ -6,7 +6,7 @@
     <div class="row">
         <Div class="col-lg-4">
             <br>
-            <img class="card-img" src="/img/posts/<?= $article_id ?>.jpg" >
+            <img class="card-img" src="/img/posts/<?= $avm['article_id'] ?>.jpg" >
             <label for="form-post-thumbnail">Miniature</label>
             <div class="custom-file">
                         <input type="file" class="custom-file-input " name="image" id="form-post-image">

@@ -2,7 +2,7 @@
 
 
 <div class="input-group" >
-<form action="index.php?controller=Article&task=editPost&article_id=<?= $article['id'] ?>" method="POST" enctype="multipart/form-data" >
+<form action="index.php?controller=Article&task=editPost&article_id=<?= $avm['id'] ?>" method="POST" enctype="multipart/form-data" >
     <div class="row">
         <Div class="col-lg-4">
             <br>
@@ -23,23 +23,23 @@
                         </div>
                     <?php } ?>
                 
-                    <div class="card-header"><small class="text-muted">Dernière mise à jour : <?= $article['created_at'] ?></small></div>
+                    <div class="card-header"><small class="text-muted">Dernière mise à jour : <?= $avm['created_at'] ?></small></div>
                     <hr>
 
                     <div class="mb-3">
                             <label  class="form-label"for="title">Titre de l'article : </label>
-                            <input type="text" class="form-control" name="title" id="title" value="<?= $article['title'] ?>" required>
+                            <input type="text" class="form-control" name="title" id="title" value="<?= $avm['title'] ?>" required>
                     </div>
 
                     <div class="mb-3">
                             <label  class="form-label"for="chapo">Chapô de l'article : </label>
-                            <textarea type="text" class="form-control" name="chapo" id="chapo" required rows="3"  ><?= $article['chapo'] ?></textarea>
+                            <textarea type="text" class="form-control" name="chapo" id="chapo" required rows="3"  ><?= $avm['chapo'] ?></textarea>
                     </div>
                 
                     <br>
                     <div class="mb-3">
                         <label class="form-label" for="content">Contenu de l'article : </label>
-                        <textarea height="auto" class="form-control" rows="15" name="content" id="content" required><?= $article['content'] ?></textarea>
+                        <textarea height="auto" class="form-control" rows="15" name="content" id="content" required><?= $avm['content'] ?></textarea>
                     </div>
                     <br>
             

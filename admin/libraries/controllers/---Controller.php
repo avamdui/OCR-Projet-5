@@ -9,7 +9,7 @@ abstract class Controller
 
     public function __construct()
     {
-        $realModelName = "\\Models\\" . $this->modelName;
+        $realModelName = "\\Repositories\\" . $this->modelName;
         $this->model = new $realModelName();
     }
 }

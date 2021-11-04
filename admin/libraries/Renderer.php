@@ -1,7 +1,7 @@
 <?php
 class Renderer
 {
-public static function render(string $path, array $variables = []): void
+public static function render(string $path, $variables = []): void
     {
         extract($variables);
         ob_start();

@@ -1,72 +1,76 @@
 <?php
-class ArticleEntity 
+
+class ArticleEntity
 {
-    public $id;
-    public $title;
-    public $chapo;
-    public $content;
-    public $created_at;
-    public $posted;
-    
-//---------------------------------------------------------------------------------------------------------------------     
-    public function getID() 
+    private $id;
+    private $title;
+    private $chapo;
+    private $content;
+    private $userId;
+    private $createdAt;
+    private $posted;
+
+    //---------------------------------------------------------------------------------------------------------------------     
+    public function getId(): int
     {
         return $this->id;
     }
-    public function setId($id) 
+    public function setId(int $id)
     {
-        $this->title = htmlspecialchars(trim($id));
-        return $this->id;
+        $this->id = $id;
     }
-//---------------------------------------------------------------------------------------------------------------------     
-    public function getTitle() 
+    //---------------------------------------------------------------------------------------------------------------------     
+    public function getTitle(): string
     {
         return $this->title;
     }
-    public function setTitle($title) 
+    public function setTitle(string $title)
     {
-        $this->title = htmlspecialchars(trim($title));
-        return $this->title;
+        $this->title = $title;
     }
-//--------------------------------------------------------------------------     
-    public function getChapo() 
+    //--------------------------------------------------------------------------     
+    public function getChapo(): string
     {
         return $this->chapo;
     }
-    public function setChapo($chapo) 
+    public function setChapo(string $chapo)
     {
-        $this->chapo = htmlspecialchars(trim($chapo));
-        return $this->chapo;
+        $this->chapo = $chapo;
     }
-//--------------------------------------------------------------------------
-    public function getContent() 
+    //--------------------------------------------------------------------------
+    public function getContent(): string
     {
         return $this->content;
     }
-    public function setContent($Content) 
+    public function setContent(string $content)
     {
-        $this->content = htmlspecialchars(trim($Content));
-        return $this->content;
+        $this->content = $content;
     }
-//--------------------------------------------------------------------------
-    public function getCreatedAt() 
+    //---------------------------------------------------------------------------------------------------------------------     
+    public function getUserId(): int
     {
-        return $this->created_at;
+        return $this->userId;
     }
-    public function setCreatedAt($created_at) 
+    public function setUserId(int $userId)
     {
-        $this->created_at = htmlspecialchars(trim($created_at));
-        return $this->created_at;
+        $this->userId = $userId;
     }
-//--------------------------------------------------------------------------
-public function getPosted() 
-{
-    return $this->posted;
-}
-public function setPosted($posted) 
-{
-    $this->posted = htmlspecialchars(trim($posted));
-    return $this->posted;
-}
-//--------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
+    public function getCreatedAt(): DateTime
+    {
+        return $this->createdAt;
+    }
+    public function setCreatedAt(DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+    //--------------------------------------------------------------------------
+    public function getPosted(): int
+    {
+        return $this->posted;
+    }
+    public function setPosted(int $posted)
+    {
+        $this->posted = $posted;
+    }
 }

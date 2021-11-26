@@ -2,27 +2,17 @@
 
 class Application
 {
-    /**
-     * @var string
-     */
-    const DEFAULT_CONTROLLER = "Contact";
-
-    /**
-     * @var string
-     */
+    const DEFAULT_CONTROLLER = "ContactController";
     const DEFAULT_TASK = "welcom";
-
-    /**
-     * Exécute l'action nécessaire sur le controller voulu
-     *
-     * @return void
-     */
-    public static function process()
+     public static function process()
     {
-        $controllerName = self::getControllerName();
-        $taskName = self::getTaskName();
-        $controller = new $controllerName();
-        $controller->$taskName();
+            
+            $controllerName = self::getControllerName();
+            $taskName = self::getTaskName();
+            $controller = new $controllerName();
+            $controller->$taskName();
+            
+
     }
 
     private static function getTaskName(): string
@@ -42,7 +32,8 @@ class Application
         if (!$controllerName) {
             $controllerName = self::DEFAULT_CONTROLLER;
         }
-
-        return "Controllers\\" . ucfirst($controllerName);
+        require_once("./libraries/controllers/$controllerName.php");
+        return ucfirst($controllerName);
+        
     }
 }

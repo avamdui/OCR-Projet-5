@@ -36,14 +36,14 @@
             <div class="progress">
               <div class="progress-bar bar4" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
-        </div>
+        </div>  
+        <a href="/CV/CV-Gabrych-Vincent.pdf" id="CV"><button type="button" class="btn btn-primary"> Télécharger mon CV
+        </button></a>
         <div class="socials">
-            <ul>
-              <li><a href=""><i class="bi bi-facebook"  ></i></span></a></li>
-              <li><a href=""><i class="bi bi-instagram" ></i></span></a></li>
-              <li><a href=""><i class="bi bi-twitter"   ></i></span></a></li>
-              <li><a href=""><i class="bi bi-linkedin"  ></i></span></a></li>
-            </ul>
+        <ul>                          
+              <li><a href="https://www.linkedin.com/in/gabrychvincent/"><i class="bi bi-linkedin" ></i></a>
+              </li>
+             </ul>
         </div>
       </div>
 
@@ -60,7 +60,7 @@
 
        
                 <h2 class="text-center">J'ai réponse à tout ! Contactez moi !</h2><br>
-                <form id="contactForm" action="index.php?controller=Contact&task=sendMail" method="POST">
+                <form id="contactForm" action="index.php?ContactController=Contact&task=sendMail" method="POST">
                   <!-- Name input -->
                   <div class="mb-3">
                     <label class="form-label" for="name">Nom et prénom</label>

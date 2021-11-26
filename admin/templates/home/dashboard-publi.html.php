@@ -10,16 +10,16 @@
     </thead>
       <tbody>
         <?php 
-        foreach($articles as $article) : { ?>
+        foreach($dvm->articles as $article) : { ?>
               <tr>
-                <th scope="row"><?= $article['id'] ?></th>
-                <td><?= $article['title'] ?></td>
+                <th scope="row"><?= $article->getId() ?></th>
+                <td><?= $article->getTitle() ?></td>
                 <td>
-                <form method='post' action='index.php?controller=Article&task=changestat'>
-                    <input type='hidden' id='id' name='id' value='<?= $article['id'] ?>' />
-                    <input type='hidden' id='etat' name='etat' value='<?= $article['posted'] ?>' />
+                <form method='post' action='index.php?controller=DashBoardController&task=ChangeArticleStatus'>
+                    <input type='hidden' id='id' name='id' value='<?= $article->getID() ?>' />
+                    <input type='hidden' id='etat' name='etat' value='<?= $article->getPosted() ?>' />
                     <button type="submit">
-                      <img id='voyant' src='<?php if($article['posted']==1){echo 'img/feuvert.png';}else{echo 'img/feurouge.png';} ?>' height=25 />
+                      <img id='voyant' src='<?php if($article->getPosted()==1){echo 'img/feuvert.png';}else{echo 'img/feurouge.png';} ?>' height=25 />
                     </button>
                     
                 </form>

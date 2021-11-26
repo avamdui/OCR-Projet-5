@@ -1,8 +1,8 @@
-<?php ($_SESSION['admin']) ? "" : \Http::redirect('index.php?controller=Login&task=loginPage') ;  ?>
 
+<?php session_start();($_SESSION['admin']) ? "" : \Http::redirect('index.php?controller=UserController&task=loginPage') ;  ?>
 
 <div class="input-group" >
-<form action="index.php?controller=Article&task=insertPost" method="POST" enctype="multipart/form-data" >
+<form action="index.php?controller=ArticleController&task=InsertArticleandImage" method="POST" enctype="multipart/form-data" >
     <div class="row">
         <Div class="col-lg-5">
             <div class="card-body">

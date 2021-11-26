@@ -5,7 +5,7 @@
         <link href="/admin/assets/css/style.css" rel="stylesheet">
         <link href="/admin/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
         <link href="/admin/assets/vendor/bootstrap-5.1.3-dist/css/bootstrap.css" rel="stylesheet">
-        <title>Mon Blog Pro - <?= $pageTitle ?></title>
+        <title>Mon Blog Pro</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     
     </head>

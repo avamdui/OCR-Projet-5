@@ -1,71 +1,97 @@
 <?php
-class Article {
-    public $id;
-    public $title;
-    public $chapo;
-    public $content;
-    public $created_at;
-    public $posted;
-    
-//---------------------------------------------------------------------------------------------------------------------     
-    public function getID() 
+class ArticleModel
+{
+    private $id;
+    private $title;
+    private $chapo;
+    private $content;
+    private $createdAt;
+    private $posted;
+    private $recent;
+
+    private $allComments;
+
+    private $author;
+
+    //---------------------------------------------------------------------------------------------------------------------     
+    public function getId(): int
     {
         return $this->id;
     }
-    public function setId($id) 
+    public function setId(int $id)
     {
-        $this->title = htmlspecialchars(trim($id));
-        return $this->id;
+        $this->id = $id;
     }
-//---------------------------------------------------------------------------------------------------------------------     
-    public function getTitle() 
+    //---------------------------------------------------------------------------------------------------------------------     
+    public function getTitle(): string
     {
         return $this->title;
     }
-    public function setTitle($title) 
+    public function setTitle(string $title)
     {
-        $this->title = htmlspecialchars(trim($title));
-        return $this->title;
+        $this->title = $title;
     }
-//--------------------------------------------------------------------------     
-    public function getChapo() 
+    //--------------------------------------------------------------------------     
+    public function getChapo(): string
     {
         return $this->chapo;
     }
-    public function setChapo($chapo) 
+    public function setChapo(string $chapo)
     {
-        $this->chapo = htmlspecialchars(trim($chapo));
-        return $this->chapo;
+        $this->chapo = $chapo;
     }
-//--------------------------------------------------------------------------
-    public function getContent() 
+    //--------------------------------------------------------------------------
+    public function getContent(): string
     {
         return $this->content;
     }
-    public function setContent($Content) 
+    public function setContent(string $content)
     {
-        $this->content = htmlspecialchars(trim($Content));
-        return $this->content;
+        $this->content = $content;
     }
-//--------------------------------------------------------------------------
-    public function getCreatedAt() 
+    //--------------------------------------------------------------------------
+    public function getCreatedAt(): DateTime
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
-    public function setCreatedAt($created_at) 
+    public function setCreatedAt(DateTime $createdAt)
     {
-        $this->created_at = htmlspecialchars(trim($created_at));
-        return $this->created_at;
+        $this->createdAt = $createdAt;
     }
-//--------------------------------------------------------------------------
-public function getPosted() 
-{
-    return $this->posted;
-}
-public function setPosted($posted) 
-{
-    $this->posted = htmlspecialchars(trim($posted));
-    return $this->posted;
-}
-//--------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
+    public function getPosted(): bool
+    {
+        return $this->posted;
+    }
+    public function setPosted(bool $posted)
+    {
+        $this->posted = $posted;
+    }
+    //---------------------------------------------------------------------------------------------------------------------     
+    public function getAllComments(): array
+    {
+        return $this->allComments;
+    }
+    public function setAllComments(array $comments)
+    {
+        $this->allComments = $comments;
+    }
+    //---------------------------------------------------------------------------------------------------------------------     
+    public function getAuthor(): ?UserModel
+    {
+        return $this->author;
+    }
+    public function setAuthor(UserModel $author)
+    {
+        $this->author = $author;
+    }
+    //--------------------------------------------------------------------------
+    public function isRecent(): bool
+    {
+        return $this->recent;
+    }
+    public function setRecent(bool $recent): void
+    {
+        $this->recent = $recent;
+    }
 }

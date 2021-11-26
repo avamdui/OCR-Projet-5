@@ -1,16 +1,17 @@
 <?php
-session_start();
+
 class Application
 {
-    const DEFAULT_CONTROLLER = "index";
-    const DEFAULT_TASK = "Welcom";
+    const DEFAULT_CONTROLLER = "DashBoardController";
+    const DEFAULT_TASK = "welcomArticles";
      public static function process()
     {
-              
+            
             $controllerName = self::getControllerName();
             $taskName = self::getTaskName();
             $controller = new $controllerName();
             $controller->$taskName();
+            
 
     }
 
@@ -31,7 +32,8 @@ class Application
         if (!$controllerName) {
             $controllerName = self::DEFAULT_CONTROLLER;
         }
-
-        return "Controllers\\" . ucfirst($controllerName);
+        require_once("./libraries/controllers/$controllerName.php");
+        return ucfirst($controllerName);
+        
     }
 }

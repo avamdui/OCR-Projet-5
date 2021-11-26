@@ -1,27 +1,53 @@
-<h1><?= $article['title'] ?></h1>
-<small>Ecrit le <?= $article['created_at'] ?></small>
-<p><?= $article['chapo'] ?></p>
-<hr>
-<?= $article['content'] ?>
- 
-<?php if (count($commentaires) === 0) : ?>
-    <h2>Il n'y a pas encore de commentaires pour cet article ... SOYEZ LE PREMIER ! :D</h2>
-<?php else : ?>
-    <h2>Il y a déjà <?= count($commentaires) ?> réactions : </h2>
-    <?php foreach ($commentaires as $commentaire) : ?>
-        <h3>Commentaire de <?= $commentaire['first_name'] ?></h3>
-        <small>Le <?= $commentaire['created_at'] ?></small>
-        <blockquote>
-            <em><?= $commentaire['content'] ?></em>
-        </blockquote>
-        <a href="index.php?controller=comment&task=delete&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
-    <?php endforeach ?>
-<?php endif ?>
+<div class="row">
+        <Div class="col-lg-4">
+            <br>
+            <img class="card-img" src="/img/posts/<?php echo $avm->article->getId() ?>.jpg" >
+        </div>
+            
+        <div class="col-lg-8">
+            <div class="card-body">
+                    <div class="card-header"><small class="text-muted">Dernière mise à jour : <?= $avm->article->getCreatedAt()->format('d/m/Y') ?></small></div>
+                    <div class="card-header"><small class="text-muted">Par : <?= $avm->article->getAuthor()->getFullname() ?></small></div>
+                    <hr>
 
-<form action="index.php?controller=comment&task=insert" method="POST">
-    <h3>Vous voulez réagir ? N'hésitez pas les bros !</h3>
-    <textarea name="content" id="" cols="30" rows="10" placeholder="Votre commentaire ..."></textarea>
-    <input type="hidden" name="article_id" value="<?= $article_id ?>">
-    <input type="hidden" name="firstname" value="<?= $_SESSION['first_name'] ?>">
-    <button>Commenter !</button>
-</form>
+                    <div class="mb-3"><?= $avm->article->getTitle() ?></div>
+
+                    <div class="mb-3"><?= $avm->article->getChapo() ?></div>
+                
+                    <br>
+                    <div class="mb-3"><?= $avm->article->getContent() ?></div>
+                    <br>
+            
+                    <hr> 
+                    <div class="col-auto text-center">  
+                    <a href="index.php?controller=ArticleController&task=showAllArticlesWithPagination" class="btn btn-info">Retour </a>
+                    </div>
+            </div>
+        </div>
+</div>
+<div class="card-body Comment">
+    <?php if (count($avm->article->getAllComments()) === 0) : ?>
+        <h4>Il n'y a pas encore de commentaires pour cet article ... SOYEZ LE PREMIER ! :D</h4>
+    <?php else : ?>
+        <h4>Il y a déjà <?= count($avm->article->getAllComments()) ?> réactions : </h4>
+
+        <?php foreach ($avm->article->getAllComments() as $commentaire) : if ($commentaire->isPublied() == 1){  ?>
+            <h5>Commentaire de <?= $commentaire->getFullname() ?></h5>
+            <small>Le <?= $commentaire->getCreatedAt()->format('d/m/Y') ?></small>
+            <blockquote>
+                <em><?= $commentaire->getContent() ?></em>
+            </blockquote>
+        <?php } endforeach ?>
+    <?php endif ?>
+
+    
+    <div class="container">
+    <?php if(!empty($_SESSION))
+                    {
+                        include $avm->commentBlock;
+                    }
+        ?>           
+    </div>
+
+</div>
+

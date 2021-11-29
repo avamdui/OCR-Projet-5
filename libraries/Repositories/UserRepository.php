@@ -79,4 +79,24 @@ class UserRepository
         }
         return $user;
     }
+
+    public function insertUser(UserEntity $articleEntity)
+        {
+            $query = $this->pdo->prepare('INSERT INTO users (id, firstname, lastname, email, password, role) VALUES(NULL, ?, ? ,? , ?, ?)');
+            $query->execute(
+            array
+            (
+                $articleEntity->getFirstname(), 
+                $articleEntity->getLastname(), 
+                $articleEntity->getEmail(), 
+                $articleEntity->getPassword(),
+                $articleEntity->getRole('user')
+            ));
+           }
+
+
+
 }
+
+
+

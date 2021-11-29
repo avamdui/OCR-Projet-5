@@ -12,32 +12,32 @@ require_once('libraries/Models/model/UserPageComment.Model.php');
 class UserService
 {
 
-public function isRegister(UserLoginModel $UserLoginModel)
-{
-    $userrepo = new UserRepository();
-    $userEntity = new UserEntity();
-    $userEntity->setEmail($UserLoginModel->getEmail());
-    $userEntity->setPassword($UserLoginModel->getPassword());
-    return $userrepo->isRegister($userEntity);
-}
+    public function isRegister(UserLoginModel $UserLoginModel)
+    {
+        $userrepo = new UserRepository();
+        $userEntity = new UserEntity();
+        $userEntity->setEmail($UserLoginModel->getEmail());
+        $userEntity->setPassword($UserLoginModel->getPassword());
+        return $userrepo->isRegister($userEntity);
+    }
 
-public function findUserwithmail(UserLoginModel $UserLoginModel){
-    $userrepo = new UserRepository();
-    $Usermodel = new UserModel();
-    $userEntity = $userrepo->findUser($UserLoginModel->getEmail());
-    
-    $Usermodel->setId($userEntity->getId());
-    $Usermodel->setFirstname(ucfirst(strtolower($userEntity->getFirstname()) ));
-    $Usermodel->setLastname(strtoupper($userEntity->getLastname()));
-    $Usermodel->setEmail($userEntity->getEmail());
-    $Usermodel->setFullname($Usermodel->getFirstname() . ' ' . $Usermodel->getLastname());
-    $Usermodel->setRole($userEntity->getRole());
-    return $Usermodel;
+    public function findUserwithmail(UserLoginModel $UserLoginModel){
+        $userrepo = new UserRepository();
+        $Usermodel = new UserModel();
+        $userEntity = $userrepo->findUser($UserLoginModel->getEmail());
+        
+        $Usermodel->setId($userEntity->getId());
+        $Usermodel->setFirstname(ucfirst(strtolower($userEntity->getFirstname()) ));
+        $Usermodel->setLastname(strtoupper($userEntity->getLastname()));
+        $Usermodel->setEmail($userEntity->getEmail());
+        $Usermodel->setFullname($Usermodel->getFirstname() . ' ' . $Usermodel->getLastname());
+        $Usermodel->setRole($userEntity->getRole());
+        return $Usermodel;
 
-}
+    }
 
-public function getAllCommentsUser($userId)
-{
+    public function getAllCommentsUser($userId)
+    {
     $commentRepo = new CommentRepository();
     $userRepo = new UserRepository();
     $articleRepo = new ArticleRepository();
@@ -72,11 +72,27 @@ public function getAllCommentsUser($userId)
     
     return $CommentUserModel;
 }
-public function deleteComment($Commentid)
+    public function deleteComment($Commentid)
 
-{
-    $commentRepo = new CommentRepository();
-    $commentRepo->deleteComment($Commentid);
-}
+    {
+        $commentRepo = new CommentRepository();
+        $commentRepo->deleteComment($Commentid);
+    }
+
+    public function newUser(UserLoginModel $model)
+    {
+
+        $userRepo = new UserRepository();
+        $entite = new UserEntity();
+        $entite->setFirstname($model->getFirstname()); 
+        $entite->setLastname($model->getLastname()); 
+        $entite->setEmail($model->getEmail());
+        $entite->setRole($model->getRole());
+        $entite->setPassword($model->getPassword());
+        $userRepo->insertUser($entite);
+
+    } 
+
+
 
 }

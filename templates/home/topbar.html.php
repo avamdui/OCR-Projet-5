@@ -25,6 +25,7 @@
                     <input class="form-control me-2" type="email" name="email" placeholder="email" />
                     <input class="form-control me-2" type="password" name="password" placeholder="Password" />
                     <button class="btn btn-warning" type="submit">Login</button>
+                    <a class="btn btn-warning"  href="index.php?controller=UserController&task=registerpage" ">Inscription</a>
                 </form>';
               }
                 ?>

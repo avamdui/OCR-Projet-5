@@ -60,6 +60,8 @@ class UserController
         session_destroy();
         \Http::redirect('../index.php');
     }
+
+
 }
 
 

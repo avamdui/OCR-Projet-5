@@ -43,6 +43,8 @@
         <ul>                          
               <li><a href="https://www.linkedin.com/in/gabrychvincent/"><i class="bi bi-linkedin" ></i></a>
               </li>
+              <li> <img src="https://insight.symfony.com/projects/7fc4b03a-82b0-4ead-9264-f5029b1207e7/small.svg" alt=""></a>
+              </li>
              </ul>
         </div>
       </div>

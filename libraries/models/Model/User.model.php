@@ -6,6 +6,7 @@ class UserModel
     private $lastname;
     private $fullname;
     private $email;
+    private $status;
     private $role;
 
     //---------------------------------------------------------------------------------------------------------------------     
@@ -56,13 +57,22 @@ class UserModel
     }
 
     //--------------------------------------------------------------------------
-    public function getRole()  : string
+    public function getStatus()  : string
     {
-        return $this->role;
+        return $this->status;
     }
-    public function setRole(string $role)
+    public function setStatus(string $status)
     {
-        $this->role = $role;
+        $this->status = $status;
     }
+        //--------------------------------------------------------------------------
+        public function getRole(): string
+        {
+            return $this->role;
+        }
+        public function setRole(string $role): void
+        {
+            $this->role = $role;
+        }
 
 }

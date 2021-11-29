@@ -12,6 +12,14 @@ require_once('libraries/Models/model/UserPageComment.Model.php');
 class UserService
 {
 
+    public function exist(UserLoginModel $UserLoginModel){
+        $userrepo = new UserRepository();
+        $userEntity = new UserEntity();
+        $userEntity->setEmail($UserLoginModel->getEmail());
+        return $userrepo->exist($userEntity);
+
+    }
+
     public function isRegister(UserLoginModel $UserLoginModel)
     {
         $userrepo = new UserRepository();
@@ -25,7 +33,6 @@ class UserService
         $userrepo = new UserRepository();
         $Usermodel = new UserModel();
         $userEntity = $userrepo->findUser($UserLoginModel->getEmail());
-        
         $Usermodel->setId($userEntity->getId());
         $Usermodel->setFirstname(ucfirst(strtolower($userEntity->getFirstname()) ));
         $Usermodel->setLastname(strtoupper($userEntity->getLastname()));
@@ -89,10 +96,38 @@ class UserService
         $entite->setEmail($model->getEmail());
         $entite->setRole($model->getRole());
         $entite->setPassword($model->getPassword());
+        $entite->setStatus($model->getstatus());
         $userRepo->insertUser($entite);
 
     } 
 
+    public function activateAccount(UserLoginModel $model){
+        $userRepo = new UserRepository();
+        $entite = new UserEntity();
+        $entite->setEmail($model->getEmail());
+        $userRepo->activateAccount($entite);
+        \Http::redirect("index.php");
+
+
+    }
+
+    public function sendActivationMail(UserLoginModel $model){
+     
+                
+            $subject =  "Nouveau Message";
+            $receiver =  $model->getEmail();
+            $content = '<html><head><title>Formulaire de Contact</title></head><body>';
+            $content .= '<p>' .'Activation du compte' .'<p>';
+            $content .= '<p>' .'Afin de valider votre inscription, merci de cliquer sur le lien suivant' .'<p>';
+            $content .= 'http://localhost:8080/index.php?controller=UserController&task=activateAccount&email=' .$model->getEmail();
+            $content .= '</body></html>';
+            $header = "MIME-Version: 1.0\r\n";
+            $header .= "Content-type: text/html; charset=UTF-8\r\n";
+            $header .= 'From: Vincent.gabrych@gmail.com' . "\r\n" . 'Reply-To: Vincent.gabrych@gmail.com' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+            mail($receiver,$subject, $content, $header);
+                 
+        
+    }
 
 
 }

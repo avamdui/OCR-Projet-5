@@ -7,6 +7,7 @@ class UserEntity
     private $lastname;
     private $email;
     private $role;
+    private $status;
     private $password;
     //--------------------------------------------------------------------------
     public function getId(): int
@@ -62,6 +63,15 @@ class UserEntity
     public function setPassword(string $password)
     {
         $this->password = $password;
+    }
+    //--------------------------------------------------------------------------
+    public function getStatus()  : string
+    {
+        return $this->status;
+    }
+    public function setStatus(string $status)
+    {
+        $this->status = $status;
     }
 
 }

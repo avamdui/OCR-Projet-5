@@ -1,9 +1,9 @@
-<?php 
-                if(isset($rvm->success))
-                {echo $rvm->success;}  ?>
-                  <?php 
-                if(isset($rvm->error))
-                {echo$rvm->error;}  ?>
+<?php
+                          if(!empty ($rvm->msg)){
+                          foreach($rvm->msg as $message){
+                                    echo $message."<br/>";
+                                }}
+                                ?>
 
 <section class="vh-100">
   <div class="container py-5 h-100">

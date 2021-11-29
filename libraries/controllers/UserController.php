@@ -87,24 +87,37 @@ class UserController
     public function register()
     {
         $userModel = New UserLoginModel();
-        $rvm = new RegisterViewModel();
-        $userModel->setFirstname($_POST['FirstName']);
-        $userModel->setLastname($_POST['LastName']);
+        $rvm = new RegisterViewModel();  
+        $service = new UserService();
+        $msg= [];
+        
         $userModel->setEmail($_POST['email']);
-        $userModel->setRole('user');
-
-        if($_POST['password'] !== $_POST['passwordverif'])
-            {
-            $rvm->error = '<div class="alert alert-danger" role="alert"><h4> Les mots de passe ne correspondent pas !</h4> </div>';
+        if(!empty($service->exist($userModel))){
+            $rvm->msg['exist'] = '<div class="alert alert-danger" role="alert"><h4> Utilisateur déja existant !</h4> </div>';
             \Renderer::render('user/register', compact('rvm'));
             }else{ 
-        $userModel->setPassword($_POST['password']);
+            $userModel->setRole('user');
+            $userModel->setFirstname($_POST['FirstName']);
+            $userModel->setLastname($_POST['LastName']);
+                if($_POST['password'] !== $_POST['passwordverif'])
+                {
+                $rvm->msg['different'] = '<div class="alert alert-danger" role="alert"><h4> Les mots de passe ne correspondent pas !</h4> </div>';
+                \Renderer::render('user/register', compact('rvm'));
+                }else{ 
+            $userModel->setPassword($_POST['password']);
+            $userModel->setStatus('unactive');
+            $service->newuser($userModel);
+            $service->sendActivationMail($userModel);
+            $rvm->msg['success'] = '<div class="alert alert-success" role="alert"><h4>Inscrition faite, vous pouvez vous connecter!!</h4></div>'; 
+            \Renderer::render('user/register', compact('rvm'));}}
+            
+    }
+
+    public function activateAccount(){
+        $userModel = New UserLoginModel();
         $service = new UserService();
-        $service->newuser($userModel);
-        
-        $rvm->success = '<div class="alert alert-success" role="alert"><h4>Inscrition faite, vous pouvez vous connecter!!</h4></div>'; 
-        \Renderer::render('user/register', compact('rvm'));}
-         
-     
+        $userModel->setEmail($_GET['email']);
+        $service->activateAccount($userModel);
+
     }
 }

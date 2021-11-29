@@ -58,6 +58,14 @@ class UserRepository
         return $exist;
 
     }
+    public function exist(UserEntity $entite){
+       
+        $email = $entite->getEmail();
+        $query = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
+        $query->execute($email);
+        $exist = $query->rowCount();
+        return $exist;
+    }
 
 
     public function findUser($UserMail)
@@ -76,23 +84,36 @@ class UserRepository
             $user->setEmail($userLine['email']);
             $user->setRole($userLine['role']);
             $user->setPassword($userLine['password']);
+            $user->setStatus($userLine['status']);
         }
         return $user;
     }
 
-    public function insertUser(UserEntity $articleEntity)
+    public function insertUser(UserEntity $userEntity)
         {
-            $query = $this->pdo->prepare('INSERT INTO users (id, firstname, lastname, email, password, role) VALUES(NULL, ?, ? ,? , ?, ?)');
+            $query = $this->pdo->prepare('INSERT INTO users (id, firstname, lastname, email, password, role, status) VALUES(NULL, ?, ? ,? , ?, ?,?)');
             $query->execute(
             array
             (
-                $articleEntity->getFirstname(), 
-                $articleEntity->getLastname(), 
-                $articleEntity->getEmail(), 
-                $articleEntity->getPassword(),
-                $articleEntity->getRole('user')
+                $userEntity->getFirstname(), 
+                $userEntity->getLastname(), 
+                $userEntity->getEmail(), 
+                $userEntity->getPassword(),
+                $userEntity->getRole('user'),
+                $userEntity->getstatus()
+
             ));
            }
+
+    public function activateAccount(UserEntity $entite)
+    {
+        $email = $entite->getEmail();
+        $sql = "UPDATE users SET status='activate' WHERE email=:email";
+        $query = $this->pdo->prepare($sql);
+        $query->execute($email);
+    }
+
+
 
 
 

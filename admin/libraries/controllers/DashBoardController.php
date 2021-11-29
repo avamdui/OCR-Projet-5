@@ -65,7 +65,5 @@ class DashBoardController
      \Http::redirect("index.php");
 
  }
-  
-
-    
+ 
 }

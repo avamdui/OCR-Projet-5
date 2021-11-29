@@ -13,7 +13,7 @@
                         <a class="nav-link text-white me-2 " href="index.php?controller=ArticleController&task=showAllArticlesWithPagination">Blog</a>
                     </li>
                     <li class="nav-item me-2">
-                        <a class="nav-link text-white me-2" href="index.php?controller=UserController&task=Mapage">Ma Page</a>
+                        <a class="nav-link text-white me-2" href="index.php?controller=UserController&task=mapage">Ma Page</a>
                     </li>
                     <?php  if (!empty($_SESSION)){
                     echo '<li class="nav-item me-2"><a class="nav-link text-white me-2"" href="index.php?controller=UserController&task=logout"">Se déconnecter ( ' . $_SESSION['first_name'] . ') </a></li>';
@@ -32,4 +32,3 @@
         </div>
     </nav> 
     <br>
-    

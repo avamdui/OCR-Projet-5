@@ -48,7 +48,7 @@ class UserController
         \Http::redirect('../index.php');
     }
 
-    public function Mapage() 
+    public function mapage() 
 
     {
         $email = $_SESSION['user'];
@@ -73,7 +73,7 @@ class UserController
     $Commentid = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
     $service = new UserService();
     $service->deleteComment($Commentid); //suppressions des commentaires
-    \Http::redirect("index.php?controller=UserController&task=Mapage");
+    \Http::redirect("index.php?controller=UserController&task=mapage");
 }
 
 }

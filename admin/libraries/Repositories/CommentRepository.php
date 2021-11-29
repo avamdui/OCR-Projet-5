@@ -24,7 +24,7 @@ class CommentRepository
             $comment->setArticleID($commentLine['article_id']);
             $comment->setContent($commentLine['content']);
             $comment->setCreatedAt(new DateTime($commentLine['created_at']));
-            $comment->setPublied($commentLine['publied'] == null ? false:$commentLine['publied']);
+            $comment->setPublied($commentLine['publied'] === null ? false:$commentLine['publied']);
             array_push($allComments, $comment); 
         }
 
@@ -51,7 +51,7 @@ class CommentRepository
             $comment->setAuthorId($commentLine['author_id']);
             $comment->setContent($commentLine['content']);
             $comment->setCreatedAt(new DateTime($commentLine['created_at']));
-            $comment->setPublied($commentLine['publied'] == null ? false:$commentLine['publied']);
+            $comment->setPublied($commentLine['publied'] === null ? false:$commentLine['publied']);
             array_push($allComments, $comment); 
         } 
         

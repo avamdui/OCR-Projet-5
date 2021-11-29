@@ -17,7 +17,7 @@ class ArticleRepository
         $article->setContent($line['content']);
         $article->setUserId(intval($line['user_id']));
         $article->setCreatedAt(new DateTime($line['created_at']));
-        $article->setPosted($line['posted'] == null ? false : $line['posted']);
+        $article->setPosted($line['posted'] === null ? false : $line['posted']);
         return $article;
     }
 
@@ -40,7 +40,7 @@ class ArticleRepository
         $articleLine = $query->fetch();
 
         $article = null;
-        if ($articleLine <> false) {
+        if ($articleLine !== false) {
             $article = $this->toArticleEntity($articleLine);
         }
         return $article;

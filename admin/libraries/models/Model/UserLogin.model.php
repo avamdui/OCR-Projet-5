@@ -20,8 +20,4 @@ class UserLoginModel extends Usermodel
     }
 
 
-
-
-
-
 }

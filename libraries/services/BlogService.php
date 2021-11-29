@@ -19,12 +19,12 @@ class BlogService
         $userRepo = new UserRepository();
 
         $articleEntity = $articleRepo->getOneArticle($id);
-        if($articleEntity == null) return null;
+        if($articleEntity === null) return null;
 
         $commentsEntities = $commentRepo->getCommentsByArticleId($id);
 
         $userArticleEntity = $userRepo->getUserById($articleEntity->getUserId()); // je veut l'utilisateur qui à l'ID de l'auteur ID de l'article et non l'ID de l'article
-        if($userArticleEntity == null) return null;
+        if($userArticleEntity === null) return null;
         
         $userModel = new UserModel();
         $userModel->setId($userArticleEntity->getId());
@@ -51,7 +51,7 @@ class BlogService
             $cm->setContent($c->getContent());
             $cm->setCreatedAt($c->getCreatedAt());
             $cm->setPublied($c->getPublied());
-            $cm->setCensored( strpos($cm->getContent(), 'http://') != false );
+            $cm->setCensored( strpos($cm->getContent(), 'http://') !== false );
             
             array_push($commentsModel, $cm);
 

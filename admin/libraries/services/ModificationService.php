@@ -49,7 +49,7 @@ class ModificationService
         $commentRepo = new CommentRepository();
 
         $articleEntity = $articleRepo->getOneArticle($id);
-        if($articleEntity == null) return null;
+        if($articleEntity === null) return null;
 
         $commentsEntities = $commentRepo->getCommentsByArticleId($id);
 
@@ -90,6 +90,4 @@ class ModificationService
         $articleRepo->deleteArticle($id);
         return $id;
     }
-
-
 }

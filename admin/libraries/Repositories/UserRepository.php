@@ -29,7 +29,7 @@ class UserRepository
     }
 
 
-    public function isAdmin($entite){
+    public function isAdmin(userentity $entite){
         $a = [
             'email'     => $entite->getEmail(),
             'password'  => $entite->getPassword()

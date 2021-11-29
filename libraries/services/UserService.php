@@ -12,7 +12,7 @@ require_once('libraries/Models/model/UserPageComment.Model.php');
 class UserService
 {
 
-public function isRegister($UserLoginModel)
+public function isRegister(UserLoginModel $UserLoginModel)
 {
     $userrepo = new UserRepository();
     $userEntity = new UserEntity();
@@ -21,7 +21,7 @@ public function isRegister($UserLoginModel)
     return $userrepo->isRegister($userEntity);
 }
 
-public function findUserwithmail($UserLoginModel){
+public function findUserwithmail(UserLoginModel $UserLoginModel){
     $userrepo = new UserRepository();
     $Usermodel = new UserModel();
     $userEntity = $userrepo->findUser($UserLoginModel->getEmail());

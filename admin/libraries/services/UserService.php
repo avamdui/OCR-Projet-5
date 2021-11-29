@@ -10,7 +10,7 @@ require_once('libraries/Models/model/Comment.Model.php');
 
 class UserService
 {
-    public function isAdmin($UserLoginModel)
+    public function isAdmin(UserloginModel $UserLoginModel)
     {
         $userrepo = new UserRepository();
         $userEntity = new UserEntity();
@@ -19,7 +19,7 @@ class UserService
         return $userrepo->isAdmin($userEntity);
     }
 
-    public function findUserwithmail($UserLoginModel)
+    public function findUserwithmail(UserloginModel $UserLoginModel)
     {
         $userrepo = new UserRepository();
         $Usermodel = new UserModel();

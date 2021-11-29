@@ -47,7 +47,7 @@ class UserRepository
         return $user;
     }
 
-    public function isRegister($entite){
+    public function isRegister(UserEntity $entite){
         $a = [
             'email'     => $entite->getEmail(),
             'password'  => $entite->getPassword()

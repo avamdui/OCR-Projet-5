@@ -5,7 +5,7 @@
         <link href="/admin/assets/css/style.css" rel="stylesheet">
         <link href="/admin/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
         <link href="/admin/assets/vendor/bootstrap-5.1.3-dist/css/bootstrap.css" rel="stylesheet">
-        <link rel=icon href=/favicon.png sizes="16x16" type="image/png">
+        <link rel=icon href=/favicon.ico sizes="16x16" type="image/png">
         <title>Mon Blog Pro</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     

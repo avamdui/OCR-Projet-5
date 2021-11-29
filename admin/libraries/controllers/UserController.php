@@ -55,7 +55,7 @@ class UserController
              }
     }
 
-    function logout() {
+    public function logout() {
         session_start(); 
         session_destroy();
         \Http::redirect('../index.php');

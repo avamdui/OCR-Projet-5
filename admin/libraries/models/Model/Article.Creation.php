@@ -36,10 +36,10 @@ class ArticleCreationModel
     //--------------------------------------------------------------------------
     public function getAuthorId(): int
     {
-        return $this->author;
+        return $this->authorId;
     }
-    public function setAuthorId(int $author)
+    public function setAuthorId(int $authorId)
     {
-        $this->author = $author;
+        $this->authorId = $authorId;
     }
 }

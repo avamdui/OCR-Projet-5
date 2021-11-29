@@ -1,8 +1,6 @@
 <?php
-
 class Database
 {
-
     /**
      * Retourne une instance de PDO
      * Attention, on précise ici deux options :

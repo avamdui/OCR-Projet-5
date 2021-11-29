@@ -81,7 +81,7 @@ class ArticleController
         \Renderer::render("articles/addpost", compact('pageTitle'));
     }
 
-    public function InsertArticleandImage()
+    public function insertArticleandImage()
     {
         // Controller les infos
         // ViewModel avec les erreurs et avec les valeurs deja saisies

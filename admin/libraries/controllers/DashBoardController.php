@@ -25,7 +25,7 @@ class DashBoardController
       \Renderer::render('home/index', compact('dvm'));
       
    }
-   public function ChangeArticleStatus()
+   public function changeArticleStatus()
    {
       $ArticleModel = new DashBoardArticlesModel();
       $ArticleModel->setPosted($_POST['etat']); 
@@ -33,7 +33,7 @@ class DashBoardController
       
 
       $Service = new DashBoardService();
-     return  $Service->ChangeArticleStatus($ArticleModel);
+     return  $Service->changeArticleStatus($ArticleModel);
       
       \Http::redirect("index.php");
 
@@ -52,7 +52,7 @@ class DashBoardController
      \Renderer::render('home/index', compact('dvm'));
      
   }
-  public function ChangeCommentsStatus()
+  public function changeCommentsStatus()
   {
      $CommentModel = new DashBoardCommentsModel();
      $CommentModel->setPublied($_POST['etat']); 
@@ -60,7 +60,7 @@ class DashBoardController
      
 
      $Service = new DashBoardService();
-    return  $Service->ChangeCommentsStatus($CommentModel);
+    return  $Service->changeCommentsStatus($CommentModel);
      
      \Http::redirect("index.php");
 

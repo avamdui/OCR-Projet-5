@@ -86,7 +86,7 @@ class ArticleRepository
         return $this->pdo->lastInsertId();
     }
    // ---------------------------------------------------------------------------------------------------------------------   
-    public function ChangeStatus(ArticleEntity $entite)
+    public function changeStatus(ArticleEntity $entite)
     {
         $id = $entite->getID();
         $posted = $entite->getPosted();

@@ -3,10 +3,7 @@ require_once('libraries/Models/model/User.Model.php');
 
 class UserLoginModel extends Usermodel
 
-
 {
-
-
     private $password;
 
     //--------------------------------------------------------------------------
@@ -18,6 +15,5 @@ class UserLoginModel extends Usermodel
     {
         $this->password = $password;
     }
-
 
 }

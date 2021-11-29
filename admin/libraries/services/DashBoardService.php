@@ -90,7 +90,7 @@ class DashBoardService
         return $CommentsUnpublied;
     }
 
-    public function ChangeArticleStatus(DashBoardArticlesModel $ArticleModel){
+    public function changeArticleStatus(DashBoardArticlesModel $ArticleModel){
         
         $articlesRepo = new ArticleRepository();
 
@@ -100,17 +100,17 @@ class DashBoardService
 
         if($articleEntite->getPosted()){
             $articleEntite->setPosted(0);
-            $articlesRepo->ChangeStatus($articleEntite);
+            $articlesRepo->changeStatus($articleEntite);
             \Http::redirect("index.php");
             
         }else{
             $articleEntite->setPosted(1);
-            $articlesRepo->ChangeStatus($articleEntite);
+            $articlesRepo->changeStatus($articleEntite);
             \Http::redirect("index.php");
             
         }
     }
-    public function ChangeCommentsStatus(DashBoardCommentsModel $CommentModel){
+    public function changeCommentsStatus(DashBoardCommentsModel $CommentModel){
         
         $Commentsrepo = new CommentRepository();
 
@@ -120,12 +120,12 @@ class DashBoardService
 
         if($CommentEntity->isPublied()){
             $CommentEntity->setPublied(0);
-            $Commentsrepo->ChangeStatus($CommentEntity);
+            $Commentsrepo->changeStatus($CommentEntity);
             \Http::redirect("index.php?controller=DashBoardController&task=welcomComments");
             
         }else{
             $CommentEntity->setPublied(1);
-            $Commentsrepo->ChangeStatus($CommentEntity);
+            $Commentsrepo->changeStatus($CommentEntity);
             \Http::redirect("index.php?controller=DashBoardController&task=welcomComments");
             
         }

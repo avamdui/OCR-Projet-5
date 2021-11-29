@@ -1,6 +1,6 @@
 <?php
-class ArticleViewModel {
+class ArticleViewModel 
+{
     public $article;
     public $pageTitle = "";
-
 }

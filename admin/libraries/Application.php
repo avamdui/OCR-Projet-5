@@ -4,15 +4,13 @@ class Application
 {
     const DEFAULT_CONTROLLER = "DashBoardController";
     const DEFAULT_TASK = "welcomArticles";
-     public static function process()
+    
+    public static function process()
     {
-            
             $controllerName = self::getControllerName();
             $taskName = self::getTaskName();
             $controller = new $controllerName();
             $controller->$taskName();
-            
-
     }
 
     private static function getTaskName(): string

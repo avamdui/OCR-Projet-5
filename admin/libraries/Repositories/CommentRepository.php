@@ -67,7 +67,7 @@ class CommentRepository
         $CommentsUnpublied = (int) $result['nb_comments'];
         return $CommentsUnpublied;
     }
-    public function ChangeStatus(CommentEntity $entite)
+    public function changeStatus(CommentEntity $entite)
     {
         $id = $entite->getId();
         $publied = $entite->isPublied();

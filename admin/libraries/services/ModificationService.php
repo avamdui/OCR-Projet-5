@@ -43,7 +43,7 @@ class ModificationService
 
     } 
          
-    public function GetArticleWithCommentsForEdit(int $id) : ?ArticleModel
+    public function getArticleWithCommentsForEdit(int $id) : ?ArticleModel
     {
         $articleRepo = new ArticleRepository();
         $commentRepo = new CommentRepository();

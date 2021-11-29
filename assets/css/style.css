@@ -1,29 +1,25 @@
 
-/*--------------------------------------------------------------
-# General
---------------------------------------------------------------*/
-body {
+body 
+{
   min-height: 100vh;
   position: relative;
   margin: 0;
    box-sizing: border-box;
-
 }
 
-footer {
+footer 
+{
   position: absolute;
   bottom: 0;
   height: 100px;
-
- 
 }
-.container {
+
+.container 
+{
   width: auto;
   padding: 0 15px;
 }
 
-
-/*------/ Socials /------*/
 .socials {
   padding: 1.5rem 0;
   font-size: 2rem
@@ -31,11 +27,6 @@ footer {
 .socials ul li {
   display: inline-block;
 }
-
-
-/*--------------------------------------------------------------
-# About
---------------------------------------------------------------*/
 
 .skill-mf span {
   color: #4e4e4e;
@@ -63,9 +54,7 @@ width: 70%;
 width: 10%;
 }
 
-/*--------------------------------------------------------------
-# Contact
---------------------------------------------------------------*/
+
 .footer-paralax {
   padding: 4rem 0 0 0;
 }

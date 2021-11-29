@@ -48,7 +48,6 @@ class UserController
             session_start();
             
             $_SESSION['admin'] = $service-> findUserwithmail($userModel)->getEmail();
-            var_dump($_SESSION);
             $_SESSION['first_name'] = $service-> findUserwithmail($userModel)->getFirstname();
             $_SESSION['idUsers'] = $service-> findUserwithmail($userModel)->getId();
                       

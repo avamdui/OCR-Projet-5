@@ -11,6 +11,5 @@ class Http
     public static function redirect(string $uri): void
     {
         header("Location: $uri");
-        exit();
     }
 }

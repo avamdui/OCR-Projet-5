@@ -28,9 +28,9 @@ class ArticleRepository
 
         $allArticles = [];
         while ($articleLine = $query->fetch()) {
-            array_push($allArticles, $this->toArticleEntity($articleLine)); // a chaque tour de boucle je cré un article et je le met dans mon tableau
+            array_push($allArticles, $this->toArticleEntity($articleLine));
         }
-        return $allArticles; // c'est un tableau qui sera rempli au fur et à mesure de la requette.
+        return $allArticles;
     }
 
     public function getOneArticle(int $id): ?ArticleEntity
@@ -74,7 +74,7 @@ class ArticleRepository
     public function updateArticle(ArticleEntity $articleEntity) : int
     {
 
-        $e = [ // je créer un tableau $edite qui contiendra les variables a mettre a jour
+        $e = [
             'title'     => $articleEntity->getTitle(),
             'content'   => $articleEntity->getContent(),
             'chapo' => $articleEntity->getChapo(),
@@ -90,7 +90,7 @@ class ArticleRepository
     {
         $id = $entite->getID();
         $posted = $entite->getPosted();
-        $e = [ // je créer un tableau $edite qui contiendra les variables a mettre a jour
+        $e = [
             'posted' => $posted,
             'article_id'  => $id
         ];

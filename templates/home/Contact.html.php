@@ -1,4 +1,10 @@
 <br><br>
+<?php
+                          if(!empty ($lvm->msg)){
+                          foreach($lvm->msg as $message){
+                                    echo $message."<br/>";
+                                }}
+                                ?>
 
 <div class="row">
   <div class="col-md-6">

@@ -106,21 +106,25 @@ class UserService
         $entite = new UserEntity();
         $entite->setEmail($model->getEmail());
         $userRepo->activateAccount($entite);
-        \Http::redirect("index.php");
-
-
+        
     }
 
     public function sendActivationMail(UserLoginModel $model){
      
-                
+            
+
             $subject =  "Nouveau Message";
             $receiver =  $model->getEmail();
-            $content = '<html><head><title>Formulaire de Contact</title></head><body>';
-            $content .= '<p>' .'Activation du compte' .'<p>';
-            $content .= '<p>' .'Afin de valider votre inscription, merci de cliquer sur le lien suivant' .'<p>';
-            $content .= 'http://localhost:8080/index.php?controller=UserController&task=activateAccount&email=' .$model->getEmail();
-            $content .= '</body></html>';
+            $content ='
+            <html>
+               <body>
+                  <div align="center">
+                  
+                     <a href="http://localhost:8080/index.php?controller=UserController&task=activateAccount&email='.urlencode($model->getEmail()).'">Confirmez votre compte !</a>
+                  </div>
+               </body>
+            </html>
+            ';
             $header = "MIME-Version: 1.0\r\n";
             $header .= "Content-type: text/html; charset=UTF-8\r\n";
             $header .= 'From: Vincent.gabrych@gmail.com' . "\r\n" . 'Reply-To: Vincent.gabrych@gmail.com' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
@@ -128,6 +132,5 @@ class UserService
                  
         
     }
-
 
 }

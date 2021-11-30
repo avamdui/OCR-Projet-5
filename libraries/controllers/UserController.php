@@ -8,6 +8,7 @@ require_once('libraries/models/view/Articles.view.php');
 require_once('libraries/models/model/UserLogin.model.php');
 require_once('libraries/models/view/User.View.php');
 require_once('libraries/models/view/register.View.php');
+require_once('libraries/models/view/Login.View.php');
 
 
 
@@ -19,28 +20,32 @@ class UserController
     public function login() 
     {
         $userModel = New UserLoginModel();
+        $lvm = new LoginViewModel();
         
         $userModel->setEmail($_POST['email']);
         $userModel->setPassword($_POST['password']);
 
         $service = new UserService();
-
-        $errors = [];
+        $pageTitle = 'Mon blog';
+        $lvm->pageTitle;
+        $msg = [];
 
         if(empty($_POST['email']) || empty($_POST['password']))
         {
-            $errors['empty'] = "Tous les champs n'ont pas été remplis!";
+            $lvm->msg['empty'] = '<div class="alert alert-danger" role="alert"><h4> Merci de compléter tous les champs! </div';
         }else if($service->isRegister($userModel) == 0)
         {
-            $errors['exist']  = "Cet administrateur n'existe pas";
+            $lvm->msg['exist']  = "Cet utilisateur n'existe pas ou le compte n'est pas validé";
         }else{
             session_start();
+            $lvm->msg['Bienvenue']  = '<div class="alert alert-success" role="alert"><h4>Identification réussie, bienvenue !!</h4></div>';
             $_SESSION['user'] = $service-> findUserwithmail($userModel)->getEmail();
             $_SESSION['first_name'] = $service-> findUserwithmail($userModel)->getFirstname();
             $_SESSION['idUsers'] = $service-> findUserwithmail($userModel)->getId();
-                      
-            \Http::redirect('index.php');
              }
+    
+    Renderer::render('home/contact', compact('lvm'));
+        
     }
 
     public function logout() {
@@ -116,8 +121,18 @@ class UserController
     public function activateAccount(){
         $userModel = New UserLoginModel();
         $service = new UserService();
-        $userModel->setEmail($_GET['email']);
+        $lvm = new LoginViewModel();
+
+        $msg = [];
+        $userModel->setEmail(urldecode($_GET['email']));
         $service->activateAccount($userModel);
+        
+        $lvm->msg['validation'] = '<div class="alert alert-success" role="alert"><h4>Compte activé, vous pouvez vous connecter!!</h4></div>';
+        $pageTitle = 'Mon blog';
+        $lvm->pageTitle;
+  
+        Renderer::render('home/contact', compact('lvm'));
 
     }
+
 }

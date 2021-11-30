@@ -52,17 +52,19 @@ class UserRepository
             'email'     => $entite->getEmail(),
             'password'  => $entite->getPassword()
         ];
-        $query = $this->pdo->prepare("SELECT * FROM users WHERE email = :email AND password = :password");
+        $query = $this->pdo->prepare("SELECT * FROM users WHERE email = :email AND password = :password AND status='active'");
         $query->execute($a);
         $exist = $query->rowCount();
         return $exist;
 
     }
-    public function exist(UserEntity $entite){
-       
-        $email = $entite->getEmail();
+    public function exist($entite){
+        $a = [
+            'email'     => $entite->getEmail(),
+         
+        ];       
         $query = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
-        $query->execute($email);
+        $query->execute($a);
         $exist = $query->rowCount();
         return $exist;
     }
@@ -107,10 +109,12 @@ class UserRepository
 
     public function activateAccount(UserEntity $entite)
     {
-        $email = $entite->getEmail();
-        $sql = "UPDATE users SET status='activate' WHERE email=:email";
+        $a = [
+            'email'     => $entite->getEmail(),
+                 ];  
+        $sql = "UPDATE `users` SET status='active' WHERE email=:email";
         $query = $this->pdo->prepare($sql);
-        $query->execute($email);
+        $query->execute($a);
     }
 
 

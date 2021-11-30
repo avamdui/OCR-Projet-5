@@ -16,7 +16,7 @@
                         <a class="nav-link text-white me-2" href="index.php?controller=UserController&task=mapage">Ma Page</a>
                     </li>
                     <?php  if (!empty($_SESSION)){
-                    echo '<li class="nav-item me-2"><a class="nav-link text-white me-2"" href="index.php?controller=UserController&task=logout"">Se déconnecter ( ' . $_SESSION['first_name'] . ') </a></li>';
+                    echo '<li class="nav-item me-2"><a class="nav-link text-white me-2"" href="index.php?controller=UserController&task=logout"">Se déconnecter (' . $_SESSION['first_name'] . ') </a></li>';
                     }
                     ?>
                 </ul>

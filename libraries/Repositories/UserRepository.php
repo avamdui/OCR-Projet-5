@@ -59,6 +59,7 @@ class UserRepository
 
     }
     public function exist(UserEntity $entite){
+    
         $a = [
             'email'     => $entite->getEmail(),
          

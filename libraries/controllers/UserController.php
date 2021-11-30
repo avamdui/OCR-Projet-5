@@ -37,7 +37,7 @@ class UserController
         {
             $lvm->msg['exist']  = "Cet utilisateur n'existe pas ou le compte n'est pas validé";
         }else{
-            session_start();
+            
             $lvm->msg['Bienvenue']  = '<div class="alert alert-success" role="alert"><h4>Identification réussie, bienvenue !!</h4></div>';
             $_SESSION['user'] = $service-> findUserwithmail($userModel)->getEmail();
             $_SESSION['first_name'] = $service-> findUserwithmail($userModel)->getFirstname();
@@ -131,6 +131,7 @@ class UserController
         $pageTitle = 'Mon blog';
         $lvm->pageTitle;
   
+
         Renderer::render('home/contact', compact('lvm'));
 
     }

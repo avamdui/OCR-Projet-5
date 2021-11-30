@@ -16,16 +16,16 @@
                         <a class="nav-link text-white me-2" href="index.php?controller=UserController&task=mapage">Ma Page</a>
                     </li>
                     <?php  if (!empty($_SESSION)){
-                    echo '<li class="nav-item me-2"><a class="nav-link text-white me-2"" href="index.php?controller=UserController&task=logout"">Se déconnecter (' . $_SESSION['first_name'] . ') </a></li>';
+                    echo '<li class="nav-item me-2"><a class="nav-link text-white me-2"" href="index.php?controller=UserController&task=logout"">Se déconnecter ( ' . $_SESSION['first_name'] . ') </a></li>';
                     }
                     ?>
                 </ul>
                 <?php if (empty($_SESSION)){  echo'
                 <form class="d-flex nav-item" action="index.php?controller=UserController&task=login" method="POST">
-                    <input class="form-control me-2" type="email" name="email" placeholder="email" />
-                    <input class="form-control me-2" type="password" name="password" placeholder="Password" />
-                    <button class="btn btn-warning" type="submit">Login</button>
-                    <a class="btn btn-warning"  href="index.php?controller=UserController&task=registerpage" ">Inscription</a>
+                    <input class="form-control nav-link me-2" type="email" name="email" placeholder="email" />
+                    <input class="form-control nav-link me-2" type="password" name="password" placeholder="Password" />
+                    <button class="mx-1 btn btn-warning " type="submit">Login</button>
+                    <a class="mx-1 btn btn-warning"  href="index.php?controller=UserController&task=registerpage" ">Inscription</a>
                 </form>';
               }
                 ?>

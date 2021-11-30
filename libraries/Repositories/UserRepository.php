@@ -62,7 +62,6 @@ class UserRepository
     
         $a = [
             'email'     => $entite->getEmail(),
-         
         ];       
         $query = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
         $query->execute($a);
@@ -74,7 +73,7 @@ class UserRepository
     public function findUser($UserMail)
     {
     
-        $query = $this->pdo->prepare("SELECT * FROM users as a JOIN COMMENTS as b ON a.id = b.id WHERE a.email = :email");
+        $query = $this->pdo->prepare("SELECT * FROM users as a WHERE a.email = :email");
         $query->execute(['email' => $UserMail]);
         $userLine = $query->fetch();
         $user = null;

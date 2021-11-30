@@ -19,30 +19,30 @@ class UserController
 {
     public function login() 
     {
-        $userModel = New UserLoginModel();
+        $userLoginModel = New UserLoginModel();
         $lvm = new LoginViewModel();
-        
-        $userModel->setEmail($_POST['email']);
-        $userModel->setPassword($_POST['password']);
-
         $service = new UserService();
         $pageTitle = 'Mon blog';
+        $sha1password = sha1($_POST['password']);
+        $password = $_POST['password'];
         $lvm->pageTitle;
+        $userLoginModel->setEmail($_POST['email']);
+        $userLoginModel->setPassword($sha1password);
         $msg = [];
 
         if(empty($_POST['email']) || empty($_POST['password']))
         {
             $lvm->msg['empty'] = '<div class="alert alert-danger" role="alert"><h4> Merci de compléter tous les champs! </div';
-        }else if($service->isRegister($userModel) == 0)
-        {
-            $lvm->msg['exist']  = "Cet utilisateur n'existe pas ou le compte n'est pas validé";
         }else{
             
-            $lvm->msg['Bienvenue']  = '<div class="alert alert-success" role="alert"><h4>Identification réussie, bienvenue !!</h4></div>';
-            $_SESSION['user'] = $service-> findUserwithmail($userModel)->getEmail();
-            $_SESSION['first_name'] = $service-> findUserwithmail($userModel)->getFirstname();
-            $_SESSION['idUsers'] = $service-> findUserwithmail($userModel)->getId();
-             }
+            if($service->isRegister($userLoginModel) == 0){$lvm->msg['exist']  = "Cet utilisateur n'existe pas ou le compte n'est pas validé";}
+                else{
+                $lvm->msg['Bienvenue']  = '<div class="alert alert-success" role="alert"><h4>Identification réussie, bienvenue !!</h4></div>';
+                $_SESSION['user'] = $service-> findUserwithmail($userLoginModel)->getEmail();
+                $_SESSION['first_name'] = $service-> findUserwithmail($userLoginModel)->getFirstname();
+                $_SESSION['idUsers'] = $service-> findUserwithmail($userLoginModel)->getId();
+                    }
+            }
     
     Renderer::render('home/contact', compact('lvm'));
         

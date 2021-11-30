@@ -11,7 +11,7 @@ class Application
             $taskName = self::getTaskName();
             $controller = new $controllerName();
             $controller->$taskName();
-            
+          
 
     }
 

@@ -1,5 +1,5 @@
 <?php
-require_once('libraries/database.php');
+require_once('DataBase/database.php');
 require_once('libraries/models/Entity/user.entity.php');
 
 class UserRepository

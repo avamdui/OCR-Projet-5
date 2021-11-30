@@ -54,7 +54,7 @@ Sur la page présentant le détail d’un blog post, il faut afficher les inform
 
 *   Mettre en place la Base de données
 *   Cloner le projet
-*   Connecter vous avec le login "admin@localhost.fr" et le mot de pass "Password"
+*   Connecter vous avec le login "admin@localhost.fr" et le mot de pass password"
 
 
 ## Auteur

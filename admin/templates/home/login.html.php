@@ -1,4 +1,10 @@
 <?php session_start(); ?>
+<?php
+                          if(!empty ($lvm->msg)){
+                          foreach($lvm->msg as $message){
+                                    echo $message."<br/>";
+                                }}
+                                ?>
 <section class="vh-100">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -24,12 +30,12 @@
                   <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Connectez vous !</h5>
 
                   <div class="form-outline mb-4">
-                    <input  name="email" type="email" id="email" class="form-control form-control-lg" />
+                    <input  name="email" type="email" id="email" class="form-control form-control-lg" require />
                     <label class="form-label" for="email">Email address</label>
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input  name="password" type="password" id="password" class="form-control form-control-lg" />
+                    <input  name="password" type="password" id="password" class="form-control form-control-lg" require/>
                     <label class="form-label" for="password">Password</label>
                   </div>
 

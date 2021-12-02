@@ -5,6 +5,7 @@ require_once('libraries/services/ModificationService.php');
 
 
 require_once('libraries/models/view/Article.view.php');
+require_once('libraries/models/view/login.view.php');
 require_once('libraries/models/view/Articles.view.php');
 require_once('libraries/models/model/ArticleModification.model.php');
 require_once('libraries/models/model/UserLogin.model.php');
@@ -20,10 +21,9 @@ class UserController
 
     public function loginPage()
     {
-       $errorMessage = "";
-       $succesMessage = ''; 
-       $pageTitle = "Connexion";
-       \Renderer::render('home/login', compact('pageTitle', 'succesMessage', 'errorMessage'));
+       $lvm = new LoginViewModel();
+       $lvm->pageTitle = "Connexion";
+       \Renderer::render('home/login', compact('lvm'));
      }
 
 
@@ -35,15 +35,18 @@ class UserController
         $userModel->setPassword($_POST['password']);
 
         $service = new UserService();
-
-        $errors = [];
+        $lvm = new LoginViewModel();
+        $lvm->pageTitle;
+        $msg = [];
 
         if(empty($_POST['email']) || empty($_POST['password']))
         {
-            $errors['empty'] = "Tous les champs n'ont pas été remplis!";
+            $lvm->msg['empty'] = "Tous les champs n'ont pas été remplis!";
+            \Renderer::render('home/login', compact('lvm'));
         }else if($service->isAdmin($userModel) == 0)
         {
-            $errors['exist']  = "Cet administrateur n'existe pas";
+            $lvm->msg['empty'] = '<div class="alert alert-danger" role="alert"><h4> Identification incorrect </div';
+            \Renderer::render('home/login', compact('lvm'));
         }else{
             session_start();
             

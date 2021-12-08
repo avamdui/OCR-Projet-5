@@ -21,50 +21,43 @@ class UserController
 
     public function loginPage()
     {
-       $lvm = new LoginViewModel();
-       $lvm->pageTitle = "Connexion";
-       \Renderer::render('home/login', compact('lvm'));
-     }
+        $lvm = new LoginViewModel();
+        $lvm->pageTitle = "Connexion";
+        \Renderer::render('home/login', compact('lvm'));
+    }
 
 
-    public function login() 
+    public function login()
     {
-        $userModel = New UserLoginModel();
-        
-        $userModel->setEmail($_POST['email']);
-        $userModel->setPassword($_POST['password']);
+        $userModel = new UserLoginModel();
+        $password = sha1(filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS));;
+        $mail = filter_input(INPUT_POST, "email", FILTER_SANITIZE_SPECIAL_CHARS);
+        $userModel->setEmail($mail);
+        $userModel->setPassword($password);
 
         $service = new UserService();
         $lvm = new LoginViewModel();
         $lvm->pageTitle;
         $msg = [];
 
-        if(empty($_POST['email']) || empty($_POST['password']))
-        {
+        if (empty($mail) || empty($password)) {
             $lvm->msg['empty'] = "Tous les champs n'ont pas été remplis!";
             \Renderer::render('home/login', compact('lvm'));
-        }else if($service->isAdmin($userModel) == 0)
-        {
+        } else if ($service->isAdmin($userModel) == 0) {
             $lvm->msg['empty'] = '<div class="alert alert-danger" role="alert"><h4> Identification incorrect </div';
             \Renderer::render('home/login', compact('lvm'));
-        }else{
-            session_start();
-            
-            $_SESSION['admin'] = $service-> findUserwithmail($userModel)->getEmail();
-            $_SESSION['first_name'] = $service-> findUserwithmail($userModel)->getFirstname();
-            $_SESSION['idUsers'] = $service-> findUserwithmail($userModel)->getId();
-                      
+        } else {
+            $_SESSION['admin'] = $service->findUserwithmail($userModel)->getEmail();
+            $_SESSION['first_name'] = $service->findUserwithmail($userModel)->getFirstname();
+            $_SESSION['idUsers'] = $service->findUserwithmail($userModel)->getId();
+
             \Http::redirect('index.php?controller=DashBoardController&task=welcomArticles');
-             }
+        }
     }
 
-    public function logout() {
-        session_start(); 
+    public function logout()
+    {
         session_destroy();
         \Http::redirect('../index.php');
     }
-
-
 }
-
-

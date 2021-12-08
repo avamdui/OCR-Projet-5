@@ -12,12 +12,12 @@ require_once('libraries/Models/model/UserPageComment.Model.php');
 class UserService
 {
 
-    public function exist(UserLoginModel $UserLoginModel){
+    public function exist(UserLoginModel $UserLoginModel)
+    {
         $userrepo = new UserRepository();
         $userEntity = new UserEntity();
         $userEntity->setEmail($UserLoginModel->getEmail());
         return $userrepo->exist($userEntity);
-
     }
 
     public function isRegister(UserLoginModel $UserLoginModel)
@@ -29,56 +29,55 @@ class UserService
         return $userrepo->isRegister($userEntity);
     }
 
-    public function findUserwithmail(UserLoginModel $UserLoginModel){
+    public function findUserwithmail(UserLoginModel $UserLoginModel)
+    {
         $userrepo = new UserRepository();
         $Usermodel = new UserModel();
         $userEntity = $userrepo->findUser($UserLoginModel->getEmail());
         $Usermodel->setId($userEntity->getId());
-        $Usermodel->setFirstname(ucfirst(strtolower($userEntity->getFirstname()) ));
+        $Usermodel->setFirstname(ucfirst(strtolower($userEntity->getFirstname())));
         $Usermodel->setLastname(strtoupper($userEntity->getLastname()));
         $Usermodel->setEmail($userEntity->getEmail());
         $Usermodel->setFullname($Usermodel->getFirstname() . ' ' . $Usermodel->getLastname());
         $Usermodel->setRole($userEntity->getRole());
         return $Usermodel;
-
     }
 
     public function getAllCommentsUser($userId)
     {
-    $commentRepo = new CommentRepository();
-    $userRepo = new UserRepository();
-    $articleRepo = new ArticleRepository();
+        $commentRepo = new CommentRepository();
+        $userRepo = new UserRepository();
+        $articleRepo = new ArticleRepository();
 
-    $CommentEntities = $commentRepo->getCommentsFromUser($userId);
+        $CommentEntities = $commentRepo->getCommentsFromUser($userId);
 
-    $CommentUserModel = [];
+        $CommentUserModel = [];
 
-    foreach($CommentEntities as $c)
-    {
-        $cm = new UserPageCommentsModel();
-        $cm->setId($c->getId());
-        $cm->setContent($c->getContent());
-        $cm->setCreatedAt($c->getCreatedAt());
-        $cm->setPublied($c->getPublied());
+        foreach ($CommentEntities as $c) {
+            $cm = new UserPageCommentsModel();
+            $cm->setId($c->getId());
+            $cm->setContent($c->getContent());
+            $cm->setCreatedAt($c->getCreatedAt());
+            $cm->setPublied($c->getPublied());
 
-        $articleEntity = $articleRepo->getOneArticle($c->getArticleID());
-        $CommentsUserEntity = $userRepo->getUserById($c->getAuthorId());
+            $articleEntity = $articleRepo->getOneArticle($c->getArticleID());
+            $CommentsUserEntity = $userRepo->getUserById($c->getAuthorId());
 
-        $CommentsUserModel = new UserModel();
-        $CommentsUserModel->setFirstname(ucfirst(strtolower($CommentsUserEntity->getFirstname())));
-        $CommentsUserModel->setLastname(strtoupper($CommentsUserEntity->getLastname()));
-        
+            $CommentsUserModel = new UserModel();
+            $CommentsUserModel->setFirstname(ucfirst(strtolower($CommentsUserEntity->getFirstname())));
+            $CommentsUserModel->setLastname(strtoupper($CommentsUserEntity->getLastname()));
 
-        $ArticlesModel = new ArticleModel();
-        $ArticlesModel->setTitle($articleEntity->getTitle());
 
-        $cm->setArticle($ArticlesModel);
-        $cm->setAuthor($CommentsUserModel);
-        array_push($CommentUserModel, $cm);
+            $ArticlesModel = new ArticleModel();
+            $ArticlesModel->setTitle($articleEntity->getTitle());
+
+            $cm->setArticle($ArticlesModel);
+            $cm->setAuthor($CommentsUserModel);
+            array_push($CommentUserModel, $cm);
+        }
+
+        return $CommentUserModel;
     }
-    
-    return $CommentUserModel;
-}
     public function deleteComment($Commentid)
 
     {
@@ -91,46 +90,43 @@ class UserService
 
         $userRepo = new UserRepository();
         $entite = new UserEntity();
-        $entite->setFirstname($model->getFirstname()); 
-        $entite->setLastname($model->getLastname()); 
+        $entite->setFirstname($model->getFirstname());
+        $entite->setLastname($model->getLastname());
         $entite->setEmail($model->getEmail());
         $entite->setRole($model->getRole());
         $entite->setPassword($model->getPassword());
         $entite->setStatus($model->getstatus());
         $userRepo->insertUser($entite);
+    }
 
-    } 
-
-    public function activateAccount(UserLoginModel $model){
+    public function activateAccount(UserLoginModel $model)
+    {
         $userRepo = new UserRepository();
         $entite = new UserEntity();
         $entite->setEmail($model->getEmail());
         $userRepo->activateAccount($entite);
-        
     }
 
-    public function sendActivationMail(UserLoginModel $model){
-     
-            
+    public function sendActivationMail(UserLoginModel $model)
+    {
 
-            $subject =  "Nouveau Message";
-            $receiver =  $model->getEmail();
-            $content ='
+
+
+        $subject =  "Nouveau Message";
+        $receiver =  $model->getEmail();
+        $content = '
             <html>
                <body>
                   <div align="center">
                   
-                     <a href="http://localhost:8080/index.php?controller=UserController&task=activateAccount&email='.urlencode($model->getEmail()).'">Confirmez votre compte !</a>
+                     <a href="http://localhost/index.php?controller=UserController&task=activateAccount&email=' . urlencode($model->getEmail()) . '">Confirmez votre compte !</a>
                   </div>
                </body>
             </html>
             ';
-            $header = "MIME-Version: 1.0\r\n";
-            $header .= "Content-type: text/html; charset=UTF-8\r\n";
-            $header .= 'From: Vincent.gabrych@gmail.com' . "\r\n" . 'Reply-To: Vincent.gabrych@gmail.com' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
-            mail($receiver,$subject, $content, $header);
-                 
-        
+        $header = "MIME-Version: 1.0\r\n";
+        $header .= "Content-type: text/html; charset=UTF-8\r\n";
+        $header .= 'From: Vincent.gabrych@gmail.com' . "\r\n" . 'Reply-To: Vincent.gabrych@gmail.com' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+        mail($receiver, $subject, $content, $header);
     }
-
 }

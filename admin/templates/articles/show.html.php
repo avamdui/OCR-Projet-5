@@ -1,13 +1,21 @@
 <?php ($_SESSION['admin']) ? "" : \Http::redirect('index.php?controller=UserController&task=loginPage');  ?>
 
+<<<<<<< Updated upstream
+<form action="index.php?controller=ArticleController&task=editArticle&article_id=<?= $avm->article->getId() ?>" method="POST" enctype="multipart/form-data">
+=======
 <form action="index.php?controller=ArticleController&task=editArticle" method="POST" enctype="multipart/form-data">
+>>>>>>> Stashed changes
     <div class="row">
         <Div class="col-lg-4">
             <br>
             <img class="card-img" src="/img/posts/<?php echo $avm->article->getId() ?>.jpg">
             <label for="form-post-thumbnail">Miniature</label>
             <div class="custom-file">
+<<<<<<< Updated upstream
+                <input type="file" class="custom-file-input " name="image" id="form-post-image">
+=======
                 <input type="file" class="custom-file-input image-gallery" id="image-gallery" name="image" accept=".jpg">
+>>>>>>> Stashed changes
                 <label class="custom-file-label " for="form-post-image">(Qualité optimale : 800x600)</label>
             </div>
         </div>
@@ -36,11 +44,19 @@
                     <textarea height="auto" class="form-control" rows="15" name="content" id="content" required><?= $avm->article->getContent() ?></textarea>
                 </div>
                 <br>
+<<<<<<< Updated upstream
+
+                <hr>
+                <div class="col-auto text-center">
+                    <a href="index.php?controller=ArticleController&task=showAllArticlesWithPagination" class="btn btn-info">Retour </a>
+                    <input type="hidden" name="articleId" value="<?= $avm->article->getId() ?>">
+=======
                 <input type="hidden" name="articleId" value="<?= $avm->article->getId() ?>">
                 <hr>
                 <div class="col-auto text-center">
                     <a href="index.php?controller=ArticleController&task=showAllArticlesWithPagination" class="btn btn-info">Retour </a>
 
+>>>>>>> Stashed changes
                     <button type="submit" class="btn btn-info">Modifier l'article </button>
                 </div>
 

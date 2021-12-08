@@ -7,36 +7,37 @@ require_once('libraries/renderer.php');
 
 class ArticleController
 {
-    public function showOneArticle() 
+    public function showOneArticle()
     {
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
         $article = (new BlogService())->getOneArticleWithComments($id);
-        
+
         $avm = new ArticleViewModel();
         $avm->article = $article;
         $avm->pageTitle = $article->getTitle() . ' by ' . $article->getAuthor()->getFullname();
         $avm->commentBlock = 'templates/articles/commentblock.html.php';
-        
 
-        \Renderer::render('articles/show',compact('avm'));
+
+        \Renderer::render('articles/show', compact('avm'));
     }
 
-    public function showAllarticles() 
+    public function showAllarticles()
     {
         $articles = (new BlogService())->getallArticle();
-        
+
         $asvm = new ArticlesViewModel();
-        
+
         $asvm->articles = $articles;
-        
-        
-        \Renderer::render('articles/blog',compact('asvm'));
+
+
+        \Renderer::render('articles/blog', compact('asvm'));
     }
 
     public function showAllArticlesWithPagination()
     {
-        if (isset($_GET['page']) && !empty($_GET['page'])) {
-            $currentPage = (int) strip_tags($_GET['page']);
+        $page = filter_input(INPUT_GET, "page", FILTER_VALIDATE_INT);
+        if (isset($page) && !empty($page)) {
+            $currentPage = (int) strip_tags($page);
         } else {
             $currentPage = 1;
         }
@@ -49,8 +50,6 @@ class ArticleController
         $asvm->pageTitle = 'Nos articles - page ' . $currentPage;
         $asvm->currentPage = $currentPage;
         $asvm->totalPage = $service->getNombreTotalDePages($articleParPage);
-
-
         \Renderer::render('articles/blog', compact('asvm'));
     }
     public function insertComment()
@@ -60,18 +59,16 @@ class ArticleController
 
         // Enregistrement du commentaire
         $model = new CommentCreationModel();
-        $model->setAuthorId($_POST['authorID']);
-        $articleID = $_POST['articleId'];
+        $model->setAuthorId(filter_input(INPUT_POST, "authorID", FILTER_SANITIZE_SPECIAL_CHARS));
+        $articleID = (filter_input(INPUT_POST, "articleId", FILTER_SANITIZE_SPECIAL_CHARS));;
         $model->setArticleID($articleID);
-        $model->setContent($_POST['content']);
+        $model->setContent(filter_input(INPUT_POST, "content", FILTER_SANITIZE_SPECIAL_CHARS));;
         $model->setPublied(0);
 
         $service = new BlogService();
         $service->insertComment($model);
 
         // Redirection vers le blog
-        \Http::redirect("index.php?controller=articleController&task=showOneArticle&id=" . $articleID);   
+        \Http::redirect("index.php?controller=articleController&task=showOneArticle&id=" . $articleID);
     }
-
 }
-

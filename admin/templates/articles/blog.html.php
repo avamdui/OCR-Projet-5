@@ -1,5 +1,9 @@
 <?php ($_SESSION['admin']) ? "" : \Http::redirect('index.php?controller=UserController&task=loginPage');  ?>
 <?php
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 if (!empty($asvm->msg)) {
     foreach ($asvm->msg as $message) {
         echo $message . "<br/>";

@@ -22,16 +22,6 @@ class ArticleController
         \Renderer::render('articles/show', compact('avm'));
     }
 
-    public function showAllArticles()
-    {
-        $articles = (new BlogService())->getAllArticles();
-        $asvm = new ArticlesViewModel();
-        $asvm->articles = $articles;
-        \Renderer::render('articles/blog', compact('asvm'));
-    }
-
-
-
     public function showAllArticlesWithPagination()
     {
         $page = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
@@ -42,6 +32,7 @@ class ArticleController
         }
         $articleParPage = 5;
 
+
         $service = new BlogService();
         $articles = $service->getAllArticlesWithPagination($articleParPage, $currentPage);
 
@@ -50,10 +41,24 @@ class ArticleController
         $asvm->pageTitle = 'Nos articles - page ' . $currentPage;
         $asvm->currentPage = $currentPage;
         $asvm->totalPage = $service->getNombreTotalDePages($articleParPage);
+<<<<<<< Updated upstream
         if (isset($_GET['msg']) && !empty($_GET['msg'])) {
             $msg['success'] = '<div class="alert alert-success" role="alert"><h4>Publication réussite</h4></div>';
             $asvm->msg;
         }
+=======
+        $result = filter_input(INPUT_GET, 'msg', FILTER_SANITIZE_SPECIAL_CHARS);
+        if ($result === 'succeed') {
+            $msg['success'] = '<div class="alert alert-success" role="alert"><h4>Publication réussite</h4></div>';
+            $asvm->msg = $msg;
+        }
+        if ($result === 'fail') {
+            $msg['fail'] = '<div class="alert alert-danger " role="alert"><h4>ERREUR</h4></div>';
+            $asvm->msg = $msg;
+        }
+
+
+>>>>>>> Stashed changes
 
         \Renderer::render('articles/blog', compact('asvm'));
     }
@@ -90,7 +95,11 @@ class ArticleController
 
         // Enregistrement de l'article
         $model = new ArticleCreationModel();
+<<<<<<< Updated upstream
         $model->setAuthorId(1);
+=======
+        $model->setAuthorId($_SESSION['idUsers']);
+>>>>>>> Stashed changes
         $model->setChapo(filter_input(INPUT_POST, "chapo", FILTER_SANITIZE_SPECIAL_CHARS));
         $model->setContent(filter_input(INPUT_POST, "content", FILTER_SANITIZE_SPECIAL_CHARS));
         $model->setTitle(filter_input(INPUT_POST, "title", FILTER_SANITIZE_SPECIAL_CHARS));
@@ -106,7 +115,11 @@ class ArticleController
         move_uploaded_file($tmpName, $path);
 
         // Redirection vers le blog
+<<<<<<< Updated upstream
         \Http::redirect("index.php?controller=articleController&task=showOneArticle&id=" . $nouvelId);
+=======
+        \Http::redirect("index.php?controller=articleController&task=showAllArticlesWithPagination&msg=succeed");
+>>>>>>> Stashed changes
     }
 
 
@@ -115,14 +128,22 @@ class ArticleController
 
         // Enregistrement de l'article
         $model = new ArticleModificationModel();
+<<<<<<< Updated upstream
         $model->setId(filter_input(INPUT_POST, "articleId", FILTER_SANITIZE_SPECIAL_CHARS));
+=======
+        $model->setId(filter_input(INPUT_POST, "articleId", FILTER_VALIDATE_INT));
+>>>>>>> Stashed changes
         $model->setChapo(filter_input(INPUT_POST, "chapo", FILTER_SANITIZE_SPECIAL_CHARS));
         $model->setContent(filter_input(INPUT_POST, "content", FILTER_SANITIZE_SPECIAL_CHARS));
         $model->setTitle(filter_input(INPUT_POST, "title", FILTER_SANITIZE_SPECIAL_CHARS));
 
         $service = new ModificationService();
         $service->editArticle($model);
+<<<<<<< Updated upstream
         $id = filter_input(INPUT_GET, "articleId", FILTER_SANITIZE_SPECIAL_CHARS);
+=======
+        $id = filter_input(INPUT_POST, "articleId", FILTER_VALIDATE_INT);
+>>>>>>> Stashed changes
 
 
         // Suppression ancienne image

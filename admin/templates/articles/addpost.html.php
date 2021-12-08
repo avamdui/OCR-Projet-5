@@ -8,7 +8,7 @@
                     <h2>Ajouter une image</h2>
                     <hr>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input " name="image" id="form-post-image">
+                        <input type="file" class="custom-file-input image-gallery" id="image-gallery" name="image" accept=".jpg">
                         <label class="custom-file-label " for="form-post-image">Ajouter une image (Qualité optimale : 800x600)</label>
                     </div>
                 </div>

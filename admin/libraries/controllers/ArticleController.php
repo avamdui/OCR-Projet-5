@@ -127,7 +127,7 @@ class ArticleController
 
                 $extension = '.jpg';
                 $path = '.././img/posts/' . $id . $extension;
-                if ($_FILES['userfile']['size']) {
+                if (file_exists($_FILES['image']['tmp_name'])) {
                         unlink($path);
                 }
 

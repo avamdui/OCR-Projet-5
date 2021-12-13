@@ -1,7 +1,8 @@
 <?php
-class ArticleViewModel {
+class ArticleViewModel
+{
     public $article;
     public $pageTitle = "Blog";
     public $commentBlock;
-
+    public $msg;
 }

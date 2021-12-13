@@ -16,6 +16,11 @@ class ArticleController
         $avm->article = $article;
         $avm->pageTitle = $article->getTitle() . ' by ' . $article->getAuthor()->getFullname();
         $avm->commentBlock = 'templates/articles/commentblock.html.php';
+        $result = filter_input(INPUT_GET, 'msg', FILTER_SANITIZE_SPECIAL_CHARS);
+        if ($result === 'succeed') {
+            $msg['succeed'] = '<div class="alert alert-success" role="alert"><h4>Votre commentaire à bien été posté,il est en attente de validation</h4></div>';
+            $avm->msg = $msg;
+        }
 
 
         \Renderer::render('articles/show', compact('avm'));
@@ -69,6 +74,6 @@ class ArticleController
         $service->insertComment($model);
 
         // Redirection vers le blog
-        \Http::redirect("index.php?controller=articleController&task=showOneArticle&id=" . $articleID);
+        \Http::redirect("index.php?controller=articleController&task=showOneArticle&id=" . $articleID . "&msg=succeed");
     }
 }

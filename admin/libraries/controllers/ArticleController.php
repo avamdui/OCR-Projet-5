@@ -124,9 +124,12 @@ class ArticleController
 
 
                 // Suppression ancienne image
+
                 $extension = '.jpg';
                 $path = '.././img/posts/' . $id . $extension;
-                unlink($path);
+                if ($_FILES['userfile']['size']) {
+                        unlink($path);
+                }
 
                 // Enregistrement de l'image
 

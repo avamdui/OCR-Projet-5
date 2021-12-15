@@ -112,7 +112,7 @@ class UserController
                 $userModel->setStatus('unactive');
                 $service->newuser($userModel);
                 $service->sendActivationMail($userModel);
-                $rvm->msg['success'] = '<div class="alert alert-success" role="alert"><h4>Inscrition faite, vous pouvez vous connecter!!</h4></div>';
+                $rvm->msg['success'] = '<div class="alert alert-success" role="alert"><h4>Inscrition faite, merci de consulter vos Emails!!</h4></div>';
                 \Renderer::render('user/register', compact('rvm'));
             }
         }
